@@ -49,7 +49,7 @@ void newRoom() {
         }
     } while(room.layout < 1 || room.layout > 3);
 
-    room.seats = (char**) malloc(room.rows * sizeof(char*));
+    room.seats = malloc(room.rows*room.cols*sizeof(char*));
     printf("\nroom created\n");
     printRoom(&room);
     saveRoomToFile(&room);
