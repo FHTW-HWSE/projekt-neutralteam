@@ -83,4 +83,7 @@ void newRoom() {
     }
     printf("\nroom created\n");
     printRoom(room);
+    saveRoomToFile(room);
+    loadRoom(room);
+    freeRoom(room);
 }

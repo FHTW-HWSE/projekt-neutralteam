@@ -1,5 +1,7 @@
 #include <stdio.h>
 
-void loadRoom() {
+#include "loadRoom.h"
+
+void loadRoom(Room room) {
     printf("load room\n");
 }

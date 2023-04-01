@@ -1,4 +1,5 @@
 #ifndef LOADROOM_H
 #define LOADROOM_H
-void loadRoom();
+#include "room.h"
+void loadRoom(Room room);
 #endif
