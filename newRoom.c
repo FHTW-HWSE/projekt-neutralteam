@@ -3,8 +3,8 @@
 #include <string.h>
 
 void newRoom() {
-    printf("new room\n\n");
-    char str[7] = "0";
+    printf("\nnew room\n");
+    char str[123] = "0";
 
     int rows = 0;
     do {
@@ -73,16 +73,24 @@ void newRoom() {
             }
             break;
     }
+    printf("\nroom created\n");
+    printf("valid seats:\n");
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
-            printf("%c", '[');
-            if (strcmp(room[i][j], ":") == 0) {
-                printf("%c", 'x');
-            } else {    
-                printf("%c", ' ');
-            }   
-            printf("%c", ']');
+            int index = i*cols+j;
+            if(index == 0) {
+                printf("%d", index);
+            } else {
+                if (strcmp(room[i][j], ":") == 0) {
+                    printf(", %d", index);
+                }
+            }
         }
-        printf("\n");
     }
+    printf("\n\nenter student id: ");
+    scanf("%s", str);
+    if (strcmp(str, "-abort") == 0) {
+        exit(0);
+    }
+    
 }
