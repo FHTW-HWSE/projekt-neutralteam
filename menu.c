@@ -29,9 +29,8 @@ void menu() {
         case 1:
             newRoom();
             break;
-        case 2: {
-            loadRoom(loadRoomFromFile());
-            }   
+        case 2: 
+            loadRoom(loadRoomFromFile()); 
             break;
     }
 }

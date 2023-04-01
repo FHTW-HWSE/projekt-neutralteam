@@ -14,6 +14,7 @@ void newRoom() {
     Room room = {
         .rows = 0,
         .cols = 0,
+        .layout = 0,
         .seats = NULL
     };
     do {
@@ -39,49 +40,16 @@ void newRoom() {
     printf("  50%%\t[2]\n");
     printf("  25%%\t[3]\n");
 
-    int layout = 0;
     do {
         printf("select layout: ");
         scanf("%s", str);
-        layout = atoi(str);
+        room.layout = atoi(str);
         if (strcmp(str, "-abort") == 0) {
             exit(0);
         }
-    } while(layout < 1 || layout > 3);
+    } while(room.layout < 1 || room.layout > 3);
 
     room.seats = (char**) malloc(room.rows * sizeof(char*));
-    switch (layout) {
-        case 1:
-            for (int i = 0; i < room.rows; i++) {
-                for (int j = 0; j < room.cols; j++) {
-                    room.seats[i*room.cols+j] = ":";
-                }
-            }
-            
-            break;
-        case 2:
-            for (int i = 0; i < room.rows; i++) {
-                for (int j = 0; j < room.cols; j++) {
-                    if ( (i % 2 == 0 && j % 2 == 0) || (i % 2 == 1 && j % 2 == 1) ) {
-                        room.seats[i*room.cols+j] = ":";
-                    } else {
-                        room.seats[i*room.cols+j] = "";
-                    }
-                }
-            }
-            break;
-        case 3:
-            for (int i = 0; i < room.rows; i++) {
-                for (int j = 0; j < room.cols; j++) {
-                    if (i % 2 == 0 && j % 2 == 0) {
-                        room.seats[i*room.cols+j] = ":";
-                    } else {
-                        room.seats[i*room.cols+j] = "";
-                    }
-                }
-            }
-            break;
-    }
     printf("\nroom created\n");
     printRoom(&room);
     saveRoomToFile(&room);
