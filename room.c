@@ -10,9 +10,10 @@ void saveRoomToFile(Room *room) {
         printf("enter filename: ");
         scanf("%s", filename);
         if (strcmp(filename, "-abort") == 0) {
+            freeRoom(room);
             exit(0);
         }
-    } while(strlen(filename) < 1);
+    } while(!isValidRoomFile(filename));
     FILE *file = fopen(filename, "w");
     fprintf(file, "%d,%d,%d", room->rows, room->cols, room->layout);
     for (int i = 0; i < room->rows; i++) {
@@ -23,11 +24,6 @@ void saveRoomToFile(Room *room) {
         }
     }
     fclose(file);
-}
-
-int isValidRoomFile(char *fileName) {
-    //implementation
-    return 1;
 }
 
 Room *loadRoomFromFile() {
@@ -98,4 +94,18 @@ int isValidSeat(Room *room, int seat) {
         break;
     }
     return 0;
+}
+
+int isValidRoomFileName(char *fileName) {
+    char c;
+    while((c = *fileName++) != '\0') {
+        if (c == '.' || c == '/' || c == '\\')
+            return 0;
+    }
+    return 1;
+}
+
+int isValidRoomFile(char *fileName) {
+    //implementation
+    return 1;
 }

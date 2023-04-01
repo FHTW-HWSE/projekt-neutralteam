@@ -23,6 +23,7 @@ void loadRoom(Room *room) {
         scanf("%s", str);
         option = atoi(str);
         if (strcmp(str, "-abort") == 0) {
+            freeRoom(room);
             exit(0);
         }
     } while(!isValidOption(option));
@@ -34,5 +35,4 @@ void loadRoom(Room *room) {
             enterStudents(room);
             break;
     }
-    freeRoom(room);
 }

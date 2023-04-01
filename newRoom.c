@@ -53,6 +53,7 @@ void newRoom() {
     for (int i = 0; i < room.rows; i++) {
         for (int j = 0; j < room.cols; j++) {
             room.seats[i*room.cols+j] = malloc(123*sizeof(char));
+            room.seats[i*room.cols+j][0] = '\0';
         }
     }
     printf("\nroom created\n");

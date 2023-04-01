@@ -3,7 +3,9 @@
 #include <string.h>
 
 #include "enterStudents.h"
+#include "loadRoom.h"
 #include "room.h"
+
 void enterStudents(Room *room) {
     printf("\nentering students\n");
     printf("valid seats: ");
@@ -12,34 +14,52 @@ void enterStudents(Room *room) {
             printf("%d ", i);
         }
     }
-    printf("\nconfirm with -save\n\n");
+    printf("\nconfirm with -save\n");
 
    while(1) {
+        printf("\n");
+
         int seat = 0;
         char seatString[123] = "";
         do {
             printf("enter seat: ");
             scanf("%s", seatString);
             if (strcmp(seatString, "-abort") == 0) {
+                freeRoom(room);
                 exit(0);
             }
             if (strcmp(seatString, "-save") == 0) {
                 saveRoomToFile(room);
+                loadRoom(room);
                 return;
             }
             seat = atoi(seatString);
         } while (!isValidSeat(room, seat));
 
-        printf("enter studentId: ");
         char studentId[123] = "";
-        scanf("%s", studentId);
-        if (strcmp(studentId, "-abort") == 0) {
-            exit(0);
-        }   
-        if (strcmp(studentId, "-save") == 0) {
-            saveRoomToFile(room);
-            return;
-        }
+        do {
+            printf("enter student id: ");
+            scanf("%s", studentId);
+            if (strcmp(studentId, "-abort") == 0) {
+                freeRoom(room);
+                exit(0);
+            }
+            if (strcmp(studentId, "-save") == 0) {
+                saveRoomToFile(room);
+                loadRoom(room);
+                return;
+            }
+        } while (!isValidStudentId(studentId));
         strcpy(room->seats[seat], studentId);
    }
+}
+
+int isValidStudentId(char *studentId) {
+    char c;
+    while((c = *studentId++) != '\0') {
+        if (c == '-')
+            return 0;
+
+    }
+    return 1;
 }
