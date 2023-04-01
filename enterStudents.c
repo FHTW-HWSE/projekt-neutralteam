@@ -5,6 +5,7 @@
 #include "enterStudents.h"
 #include "loadRoom.h"
 #include "room.h"
+#include "main.h"
 
 void enterStudents(Room *room) {
     printf("\nentering students\n");
@@ -20,7 +21,7 @@ void enterStudents(Room *room) {
         printf("\n");
 
         int seat = 0;
-        char seatString[123] = "";
+        char seatString[MAGIC_NUMBER] = "";
         do {
             printf("enter seat: ");
             scanf("%s", seatString);
@@ -36,7 +37,7 @@ void enterStudents(Room *room) {
             seat = atoi(seatString);
         } while (!isValidSeat(room, seat));
 
-        char studentId[123] = "";
+        char studentId[MAGIC_NUMBER] = "";
         do {
             printf("enter student id: ");
             scanf("%s", studentId);

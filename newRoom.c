@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "menu.h"
+#include "main.h"
 #include "room.h"
 #include "newRoom.h"
 #include "loadRoom.h"
@@ -10,7 +11,7 @@
 void newRoom() {
     printf("\nnew room\n");
     
-    char str[123] = "0";
+    char str[MAGIC_NUMBER] = "0";
     Room room = {
         .rows = 0,
         .cols = 0,
@@ -52,7 +53,7 @@ void newRoom() {
     room.seats = malloc(room.rows*room.cols*sizeof(char*));
     for (int i = 0; i < room.rows; i++) {
         for (int j = 0; j < room.cols; j++) {
-            room.seats[i*room.cols+j] = malloc(123*sizeof(char));
+            room.seats[i*room.cols+j] = malloc(MAGIC_NUMBER*sizeof(char));
             room.seats[i*room.cols+j][0] = '\0';
         }
     }

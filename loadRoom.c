@@ -4,6 +4,7 @@
 
 #include "loadRoom.h"
 
+#include "main.h"
 #include "room.h"
 #include "menu.h"
 #include "enterStudents.h"
@@ -16,7 +17,7 @@ void loadRoom(Room *room) {
     printf("  query students  [1]\n");
     printf("  enter students  [2]\n");
 
-    char str[123] = "0";
+    char str[MAGIC_NUMBER] = "0";
     int option = 0;
     do {
         printf("select option: ");

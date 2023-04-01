@@ -3,9 +3,10 @@
 #include <stdlib.h>
 
 #include "room.h"
+#include "main.h"
 
 void saveRoomToFile(Room *room) {
-    char filename[123];
+    char filename[MAGIC_NUMBER];
     do {
         printf("enter filename: ");
         scanf("%s", filename);
@@ -27,7 +28,7 @@ void saveRoomToFile(Room *room) {
 }
 
 Room *loadRoomFromFile() {
-    char filename[123];
+    char filename[MAGIC_NUMBER];
     do {
         printf("enter filename: ");
         scanf("%s", filename);
@@ -36,8 +37,8 @@ Room *loadRoomFromFile() {
         }
     } while(!isValidRoomFile(filename));
     FILE *file = fopen(filename, "r");
-    char fileContent[123456]; 
-    fgets(fileContent, 123456, file);
+    char fileContent[MORE_MAGICAL_NUMBER]; 
+    fgets(fileContent, MORE_MAGICAL_NUMBER, file);
     fclose(file);
     //implementation
     return NULL;
