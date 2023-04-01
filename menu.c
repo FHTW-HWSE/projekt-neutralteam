@@ -30,8 +30,7 @@ void menu() {
             newRoom();
             break;
         case 2: {
-            char *validFileName = NULL;
-            loadRoom(loadRoomFromFile(validFileName));
+            loadRoom(loadRoomFromFile());
             }   
             break;
     }

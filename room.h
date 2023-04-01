@@ -7,6 +7,6 @@ typedef struct Room {
 } Room;
 void printRoom(Room *room);
 void saveRoomToFile(Room *room);
-Room *loadRoomFromFile(char *filename);
+Room *loadRoomFromFile();
 void freeRoom(Room *room);
 #endif

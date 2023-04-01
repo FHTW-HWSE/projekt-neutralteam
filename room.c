@@ -8,7 +8,7 @@ void saveRoomToFile(Room *room) {
 
 }
 
-Room *loadRoomFromFile(char *filename) {
+Room *loadRoomFromFile() {
     return NULL;
 }
 
