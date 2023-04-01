@@ -6,4 +6,6 @@ typedef struct Room {
     char **seats;
 } Room;
 void printRoom(Room room);
+void saveRoomToFile(Room room);
+void freeRoom(Room room);
 #endif

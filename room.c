@@ -2,6 +2,11 @@
 #include <string.h>
 
 #include "room.h"
+
+void saveRoomToFile(Room room) {
+
+}
+
 void printRoom(Room room) {
       for (int i = 0; i < room.rows; i++) {
         for (int j = 0; j < room.cols; j++) {
@@ -15,4 +20,8 @@ void printRoom(Room room) {
         }
         printf("\n");
     }
+}
+
+void freeRoom(Room room) {
+    free(room.seats);
 }
