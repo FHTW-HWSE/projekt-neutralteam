@@ -54,5 +54,4 @@ void newRoom() {
     printRoom(&room);
     saveRoomToFile(&room);
     loadRoom(&room);
-    freeRoom(&room);
 }
