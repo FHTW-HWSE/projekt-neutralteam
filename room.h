@@ -11,5 +11,5 @@ void saveRoomToFile(Room *room);
 Room *loadRoomFromFile();
 void freeRoom(Room *room);
 int isValidRoomFile(char *fileName);
-int isValidPlace(Room *room, int row, int col);
+int isValidSeat(Room *room, int seat);
 #endif

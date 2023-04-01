@@ -51,7 +51,7 @@ void printRoomLayout(Room *room) {
       for (int i = 0; i < room->rows; i++) {
         for (int j = 0; j < room->cols; j++) {
             printf("%c", '[');
-            if (!isValidPlace(room, i, j)) {
+            if (!isValidSeat(room, i*room->cols+j)) {
                 printf("%c", ' ');
             } else {
                 printf("%c", 'X');
@@ -63,10 +63,15 @@ void printRoomLayout(Room *room) {
 }
 
 void freeRoom(Room *room) {
+    for (int i = 0; i < room->rows*room->cols; i++) {
+        free(room->seats[i]);
+    }
     free(room->seats);
 }
 
-int isValidPlace(Room *room, int row, int col) {
+int isValidSeat(Room *room, int seat) {
+    int row = seat / room->cols;
+    int col = seat % room->cols;
     if (row < 0 || row >= room->rows) {
         return 0;
     }
