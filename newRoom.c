@@ -50,6 +50,11 @@ void newRoom() {
     } while(room.layout < 1 || room.layout > 3);
 
     room.seats = malloc(room.rows*room.cols*sizeof(char*));
+    for (int i = 0; i < room.rows; i++) {
+        for (int j = 0; j < room.cols; j++) {
+            room.seats[i*room.cols+j] = "";
+        }
+    }
     printf("\nroom created\n");
     printRoom(&room);
     saveRoomToFile(&room);
