@@ -56,7 +56,7 @@ void newRoom() {
         }
     }
     printf("\nroom created\n");
-    printRoom(&room);
+    printRoomLayout(&room);
     saveRoomToFile(&room);
     loadRoom(&room);
 }

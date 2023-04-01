@@ -6,7 +6,7 @@ typedef struct Room {
     int layout;
     char **seats;
 } Room;
-void printRoom(Room *room);
+void printRoomLayout(Room *room);
 void saveRoomToFile(Room *room);
 Room *loadRoomFromFile();
 void freeRoom(Room *room);

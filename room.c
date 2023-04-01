@@ -7,7 +7,7 @@
 void saveRoomToFile(Room *room) {
     char filename[123];
     do {
-        printf("enter filename: ");
+        printf("\nenter filename: ");
         scanf("%s", filename);
         if (strcmp(filename, "-abort") == 0) {
             exit(0);
@@ -29,7 +29,7 @@ Room *loadRoomFromFile() {
     return NULL;
 }
 
-void printRoom(Room *room) {
+void printRoomLayout(Room *room) {
       for (int i = 0; i < room->rows; i++) {
         for (int j = 0; j < room->cols; j++) {
             printf("%c", '[');
