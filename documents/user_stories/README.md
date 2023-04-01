@@ -1,0 +1,1 @@
+für diese anwendung gibt es nur eine rolle, welche in weiterer folge "user" genannt wird.
