@@ -57,4 +57,5 @@ int isValidPlace(Room *room, int row, int col) {
         }
         break;
     }
+    return 0;
 }
