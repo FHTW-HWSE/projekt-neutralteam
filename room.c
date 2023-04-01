@@ -14,7 +14,7 @@ void saveRoomToFile(Room *room) {
             freeRoom(room);
             exit(0);
         }
-    } while(!isValidRoomFile(filename));
+    } while(!isValidRoomFileName(filename));
     FILE *file = fopen(filename, "w");
     fprintf(file, "%d,%d,%d", room->rows, room->cols, room->layout);
     for (int i = 0; i < room->rows; i++) {
@@ -29,19 +29,15 @@ void saveRoomToFile(Room *room) {
 
 Room *loadRoomFromFile() {
     char filename[MAGIC_NUMBER];
+    Room *room = NULL;
     do {
         printf("enter filename: ");
         scanf("%s", filename);
         if (strcmp(filename, "-abort") == 0) {
             exit(0);
         }
-    } while(!isValidRoomFile(filename));
-    FILE *file = fopen(filename, "r");
-    char fileContent[MORE_MAGICAL_NUMBER]; 
-    fgets(fileContent, MORE_MAGICAL_NUMBER, file);
-    fclose(file);
-    //implementation
-    return NULL;
+    } while((room = roomFromFile(filename)) == NULL);
+    return room;
 }
 
 void printRoomLayout(Room *room) {
@@ -64,6 +60,7 @@ void freeRoom(Room *room) {
         free(room->seats[i]);
     }
     free(room->seats);
+    free(room);
 }
 
 int isValidSeat(Room *room, int seat) {
@@ -106,7 +103,68 @@ int isValidRoomFileName(char *fileName) {
     return 1;
 }
 
-int isValidRoomFile(char *fileName) {
-    //implementation
-    return 1;
+Room *roomFromFile(char *fileName) {
+    if (!isValidRoomFileName(fileName)) {
+        printf("invalid filename\n");
+        return NULL;
+    }
+    FILE *file = fopen(fileName, "r");
+    Room *room =  malloc(sizeof(Room));
+    if (file == NULL) {
+        printf("file not found\n");
+        return NULL;
+    }
+    char fileContent[MORE_MAGICAL_NUMBER];
+    fgets(fileContent, MORE_MAGICAL_NUMBER, file);
+    fclose(file);
+    char *token = strtok(fileContent, ",");
+    if (token == NULL) {
+        printf("invalid file format\n");
+        return NULL;
+    }
+    room->rows = atoi(token);
+    token = strtok(NULL, ",");
+    if (token == NULL) {
+        printf("invalid file format\n");
+        return NULL;
+    }
+    room->cols = atoi(token);
+    token = strtok(NULL, ",");
+    if (token == NULL) {
+        printf("invalid file format\n");
+        return NULL;
+    }
+    room->layout = atoi(token);
+    if ( room->layout < 1 || room->layout > 3) {
+        printf("invalid layout\n");
+        return NULL;
+    }
+    room->seats = malloc(sizeof(char*) * room->rows * room->cols);
+    for (int i = 0; i < room->rows*room->cols; i++) {
+        room->seats[i] = malloc(sizeof(char) * MAGIC_NUMBER);
+        strcpy(room->seats[i], "");
+    }
+    while((token = strtok(NULL, ",")) != NULL) {
+        char *token2 = strtok(token, ":");
+        if (token2 == NULL) {
+            printf("invalid file format\n");
+            return NULL;
+        }
+        int seat = atoi(token2);
+        if (seat < 0 || seat >= room->rows*room->cols || !isValidSeat(room, seat)) {
+            printf("invalid seat\n");
+            return NULL;
+        }
+        token2 = strtok(NULL, ":");
+        if (token2 == NULL) {
+            printf("invalid file format\n");
+            return NULL;
+        }
+        if (strlen(token2) >= MAGIC_NUMBER) {
+            printf("invalid name\n");
+            return NULL;
+        }
+        strcpy(room->seats[seat], token2);
+    }
+    return room;
 }

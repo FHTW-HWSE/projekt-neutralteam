@@ -10,7 +10,7 @@ void printRoomLayout(Room *room);
 void saveRoomToFile(Room *room);
 Room *loadRoomFromFile();
 void freeRoom(Room *room);
-int isValidRoomFile(char *fileName);
 int isValidRoomFileName(char *fileName);
 int isValidSeat(Room *room, int seat);
+Room *roomFromFile(char *fileName);
 #endif
