@@ -3,7 +3,11 @@
 #include <string.h>
 
 #include "loadRoom.h"
+
 #include "room.h"
+#include "menu.h"
+#include "enterStudents.h"
+#include "queryStudents.h"
 
 void loadRoom(Room *room) {
     printf("\nroom loaded\n");
@@ -22,6 +26,13 @@ void loadRoom(Room *room) {
             exit(0);
         }
     } while(!isValidOption(option));
-
+    switch (option) {
+        case 1:
+            queryStudents(room);
+            break;
+        case 2:
+            enterStudents(room);
+            break;
+    }
     freeRoom(room);
 }
