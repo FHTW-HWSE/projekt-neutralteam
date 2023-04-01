@@ -2,6 +2,6 @@
 
 #include "loadRoom.h"
 
-void loadRoom(Room room) {
+void loadRoom(Room *room) {
     printf("load room\n");
 }

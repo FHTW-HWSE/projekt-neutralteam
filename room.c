@@ -1,17 +1,22 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "room.h"
 
-void saveRoomToFile(Room room) {
+void saveRoomToFile(Room *room) {
 
 }
 
-void printRoom(Room room) {
-      for (int i = 0; i < room.rows; i++) {
-        for (int j = 0; j < room.cols; j++) {
+Room *loadRoomFromFile(char *filename) {
+    return NULL;
+}
+
+void printRoom(Room *room) {
+      for (int i = 0; i < room->rows; i++) {
+        for (int j = 0; j < room->cols; j++) {
             printf("%c", '[');
-            if (strcmp(room.seats[i*room.cols+j], ":") == 0) {
+            if (strcmp(room->seats[i*room->cols+j], ":") == 0) {
                 printf("%c", ' ');
             } else {
                 printf("%c", 'X');
@@ -22,6 +27,6 @@ void printRoom(Room room) {
     }
 }
 
-void freeRoom(Room room) {
-    free(room.seats);
+void freeRoom(Room *room) {
+    free(room->seats);
 }

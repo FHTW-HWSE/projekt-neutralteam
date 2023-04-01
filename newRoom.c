@@ -5,6 +5,7 @@
 #include "menu.h"
 #include "room.h"
 #include "newRoom.h"
+#include "loadRoom.h"
 
 void newRoom() {
     printf("\nnew room\n");
@@ -82,8 +83,8 @@ void newRoom() {
             break;
     }
     printf("\nroom created\n");
-    printRoom(room);
-    saveRoomToFile(room);
-    loadRoom(room);
-    freeRoom(room);
+    printRoom(&room);
+    saveRoomToFile(&room);
+    loadRoom(&room);
+    freeRoom(&room);
 }

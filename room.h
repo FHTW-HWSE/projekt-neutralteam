@@ -5,7 +5,8 @@ typedef struct Room {
     int cols;
     char **seats;
 } Room;
-void printRoom(Room room);
-void saveRoomToFile(Room room);
-void freeRoom(Room room);
+void printRoom(Room *room);
+void saveRoomToFile(Room *room);
+Room *loadRoomFromFile(char *filename);
+void freeRoom(Room *room);
 #endif
