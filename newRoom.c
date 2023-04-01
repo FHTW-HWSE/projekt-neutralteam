@@ -4,8 +4,9 @@
 
 void newRoom() {
     printf("new room\n\n");
-    int rows = 0;
     char str[7] = "0";
+
+    int rows = 0;
     do {
         printf("enter number of rows: ");
         scanf("%s", str);
@@ -14,6 +15,7 @@ void newRoom() {
             exit(0);
         }
     } while(rows < 1);
+
     int cols = 0;
     do {
         printf("enter number of columns: ");
@@ -23,5 +25,6 @@ void newRoom() {
             exit(0);
         }
     } while(cols < 1);
+    
     printf("rows: %d, cols: %d\n", rows, cols);
 }

@@ -8,9 +8,8 @@
 
 
 void menu() {
-    int option = 0;
     char str[7] = "0";
-
+    int option = 0;
     do {
         printf("\nmenu: \n");
         printf("  new\t[1]\n");
