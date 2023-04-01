@@ -3,9 +3,8 @@
 #include <string.h>
 
 #include "menu.h"
+#include "room.h"
 #include "newRoom.h"
-
-
 
 void newRoom() {
     printf("\nnew room\n");
@@ -82,26 +81,6 @@ void newRoom() {
             }
             break;
     }
-
     printf("\nroom created\n");
     printRoom(room);
-
-
-
-
-}
-
-void printRoom(Room room) {
-      for (int i = 0; i < room.rows; i++) {
-        for (int j = 0; j < room.cols; j++) {
-            printf("%c", '[');
-            if (strcmp(room.seats[i*room.cols+j], ":") == 0) {
-                printf("%c", ' ');
-            } else {
-                printf("%c", 'X');
-            }
-            printf("%c", ']');
-        }
-        printf("\n");
-    }
 }
