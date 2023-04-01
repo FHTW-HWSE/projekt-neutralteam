@@ -4,7 +4,8 @@
 #include "room.h"
 
 void loadRoom(Room *room) {
-    printf("load room\n");
+    printf("\nroom loaded\n");
+    printRoomLayout(room);
 
     freeRoom(room);
 }

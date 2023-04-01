@@ -7,7 +7,7 @@
 void saveRoomToFile(Room *room) {
     char filename[123];
     do {
-        printf("\nenter filename: ");
+        printf("enter filename: ");
         scanf("%s", filename);
         if (strcmp(filename, "-abort") == 0) {
             exit(0);
