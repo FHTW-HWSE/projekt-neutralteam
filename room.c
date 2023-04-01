@@ -25,7 +25,25 @@ void saveRoomToFile(Room *room) {
     fclose(file);
 }
 
+int isValidRoomFile(char *fileName) {
+    //implementation
+    return 1;
+}
+
 Room *loadRoomFromFile() {
+    char filename[123];
+    do {
+        printf("enter filename: ");
+        scanf("%s", filename);
+        if (strcmp(filename, "-abort") == 0) {
+            exit(0);
+        }
+    } while(!isValidRoomFile(filename));
+    FILE *file = fopen(filename, "r");
+    char fileContent[123456]; 
+    fgets(fileContent, 123456, file);
+    fclose(file);
+    //implementation
     return NULL;
 }
 

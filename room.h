@@ -10,5 +10,6 @@ void printRoomLayout(Room *room);
 void saveRoomToFile(Room *room);
 Room *loadRoomFromFile();
 void freeRoom(Room *room);
+int isValidRoomFile(char *fileName);
 int isValidPlace(Room *room, int row, int col);
 #endif
