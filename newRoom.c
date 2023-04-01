@@ -25,6 +25,64 @@ void newRoom() {
             exit(0);
         }
     } while(cols < 1);
-    
-    printf("rows: %d, cols: %d\n", rows, cols);
+
+    printf("\nroom layout\n");
+    printf("  100%%\t[1]\n");
+    printf("  50%%\t[2]\n");
+    printf("  25%%\t[3]\n");
+
+    int layout = 0;
+    do {
+        printf("select layout: ");
+        scanf("%s", str);
+        layout = atoi(str);
+        if (strcmp(str, "-abort") == 0) {
+            exit(0);
+        }
+    } while(layout < 1 || layout > 3);
+
+    char *room[rows][cols];
+    switch (layout) {
+        case 1:
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    room[i][j] = ":";
+                }
+            }
+            break;
+        case 2:
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    if ( (i % 2 == 0 && j % 2 == 0) || (i % 2 == 1 && j % 2 == 1) ) {
+                        room[i][j] = ":";
+                    } else {
+                        room[i][j] = "";
+                    }
+                }
+            }
+            break;
+        case 3:
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    if (i % 2 == 0 && j % 2 == 0) {
+                       room[i][j] = ":";
+                    } else {
+                        room[i][j] = "";
+                    }
+                }
+            }
+            break;
+    }
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            printf("%c", '[');
+            if (strcmp(room[i][j], ":") == 0) {
+                printf("%c", 'x');
+            } else {    
+                printf("%c", ' ');
+            }   
+            printf("%c", ']');
+        }
+        printf("\n");
+    }
 }

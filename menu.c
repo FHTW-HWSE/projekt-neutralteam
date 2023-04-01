@@ -11,7 +11,7 @@ void menu() {
     char str[7] = "0";
     int option = 0;
     do {
-        printf("\nmenu: \n");
+        printf("\nmenu\n");
         printf("  new\t[1]\n");
         printf("  load\t[2]\n");
         printf("select option: ");
