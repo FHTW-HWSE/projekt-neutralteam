@@ -151,17 +151,13 @@ Room *roomFromFile(char *fileName) {
             return NULL;
         }
         int seat = atoi(token2);
-        if (seat < 0 || seat >= room->rows*room->cols || !isValidSeat(room, seat)) {
+        if (!isValidSeat(room, seat)) {
             printf("invalid seat\n");
             return NULL;
         }
         token2 = strtok(NULL, ":");
         if (token2 == NULL) {
             printf("invalid file format\n");
-            return NULL;
-        }
-        if (strlen(token2) >= MAGIC_NUMBER) {
-            printf("invalid name\n");
             return NULL;
         }
         strcpy(room->seats[seat], token2);
