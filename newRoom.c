@@ -8,32 +8,43 @@
 #include "newRoom.h"
 #include "loadRoom.h"
 
+Room *genRoom(int rows, int cols, int layout) {
+    Room *room = malloc(sizeof(Room));
+    room->rows = rows;
+    room->cols = cols;
+    room->layout = layout;
+    room->seats = malloc(sizeof(char*) * rows * cols);
+    for (int i = 0; i < rows*cols; i++) {
+        room->seats[i] = malloc(sizeof(char) * MAGIC_NUMBER);
+        strcpy(room->seats[i], "");
+    }
+    return room;
+}
+
 void newRoom() {
     printf("\nnew room\n");
     
     char str[MAGIC_NUMBER] = "0";
-    Room *room = malloc(sizeof(Room));
-    room->rows = 0;
-    room->cols = 0;
-    room->layout = 0;
-    room->seats = NULL;
+    int rows = 0;
+    int cols = 0;
+    int layout = 0;
     do {
         printf("enter number of rows: ");
         scanf("%s", str);
-        room->rows = atoi(str);
+        rows = atoi(str);
         if (strcmp(str, "-abort") == 0) {
             exit(0);
         }
-    } while(room->rows < 1);
+    } while(rows < 1);
 
     do {
         printf("enter number of columns: ");
         scanf("%s", str);
-        room->cols = atoi(str);
+        cols = atoi(str);
         if (strcmp(str, "-abort") == 0) {
             exit(0);
         }
-    } while(room->cols < 1);
+    } while(cols < 1);
 
     printf("\nroom layout\n");
     printf("  100%%\t[1]\n");
@@ -43,20 +54,23 @@ void newRoom() {
     do {
         printf("select layout: ");
         scanf("%s", str);
-        room->layout = atoi(str);
+        layout = atoi(str);
         if (strcmp(str, "-abort") == 0) {
             exit(0);
         }
-    } while(room->layout < 1 || room->layout > 3);
+    } while(layout < 1 || layout > 3);
 
-    room->seats = malloc(room->rows*room->cols*sizeof(char*));
-    for (int i = 0; i < room->rows; i++) {
-        for (int j = 0; j < room->cols; j++) {
-            room->seats[i*room->cols+j] = malloc(MAGIC_NUMBER*sizeof(char));
-            room->seats[i*room->cols+j][0] = '\0';
-        }
-    }
+    Room *room = genRoom(rows, cols, layout);
     printf("\nroom created\n");
-    saveRoomToFile(room);
+    char filename[MAGIC_NUMBER];
+    do {
+        printf("enter filename: ");
+        scanf("%s", filename);
+        if (strcmp(filename, "-abort") == 0) {
+            freeRoom(room);
+            exit(0);
+        }
+    } while(!isValidRoomFileName(filename));
+    saveRoomToFile(room, filename);
     loadRoom(room);
 }

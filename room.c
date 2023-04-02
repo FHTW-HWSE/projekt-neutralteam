@@ -5,17 +5,8 @@
 #include "room.h"
 #include "main.h"
 
-void saveRoomToFile(Room *room) {
-    char filename[MAGIC_NUMBER];
-    do {
-        printf("enter filename: ");
-        scanf("%s", filename);
-        if (strcmp(filename, "-abort") == 0) {
-            freeRoom(room);
-            exit(0);
-        }
-    } while(!isValidRoomFileName(filename));
-    FILE *file = fopen(filename, "w");
+void saveRoomToFile(Room *room, char *fileName) {
+    FILE *file = fopen(fileName, "w");
     fprintf(file, "%d,%d,%d", room->rows, room->cols, room->layout);
     for (int i = 0; i < room->rows; i++) {
         for (int j = 0; j < room->cols; j++) {
@@ -79,6 +70,16 @@ int isValidSeat(Room *room, int seat) {
         break;
     }
     return 0;
+}
+
+void printStudentIds(Room *room) {
+    for (int i = 0; i < room->rows*room->cols; i++) {
+        if (isValidSeat(room, i)) {
+            if (strlen(room->seats[i]) > 0) {
+                printf("%s: %d\n", room->seats[i], i);
+            }
+        }
+    }
 }
 
 int isValidRoomFileName(char *fileName) {

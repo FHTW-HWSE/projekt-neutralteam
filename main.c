@@ -1,9 +1,24 @@
 #include <stdio.h>
+#include <string.h>
 #include "menu.h"
 
-int main(void) {
+int main(int argc, char **argv) {
     printf("welcome to *project*!\n");
-    menu();
-    return 0;
+    if (argc > 2) {
+        printf("too many arguments\n");
+        return 1;
+    }
+    if (argc == 2) {
+        if (strcmp(argv[1], "-tests") == 0) {
+            printf("running tests...\n");
+            return 0;
+        } else {
+            printf("undefined argument\n");
+            return 1;
+        }
+    }
+    if(argc == 1) {
+        menu();
+        return 0;
+    }
 }
-

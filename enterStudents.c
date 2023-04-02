@@ -30,7 +30,16 @@ void enterStudents(Room *room) {
                 exit(0);
             }
             if (strcmp(seatString, "-save") == 0) {
-                saveRoomToFile(room);
+                char filename[MAGIC_NUMBER];
+                do {
+                    printf("enter filename: ");
+                    scanf("%s", filename);
+                    if (strcmp(filename, "-abort") == 0) {
+                        freeRoom(room);
+                        exit(0);
+                    }
+                } while(!isValidRoomFileName(filename));
+                saveRoomToFile(room, filename);
                 loadRoom(room);
                 return;
             }
@@ -46,7 +55,16 @@ void enterStudents(Room *room) {
                 exit(0);
             }
             if (strcmp(studentId, "-save") == 0) {
-                saveRoomToFile(room);
+                char filename[MAGIC_NUMBER];
+                do {
+                    printf("enter filename: ");
+                    scanf("%s", filename);
+                    if (strcmp(filename, "-abort") == 0) {
+                        freeRoom(room);
+                        exit(0);
+                    }
+                } while(!isValidRoomFileName(filename));
+                saveRoomToFile(room, filename);
                 loadRoom(room);
                 return;
             }
