@@ -8,7 +8,6 @@ typedef struct Room {
 } Room;
 void printRoomLayout(Room *room);
 void saveRoomToFile(Room *room);
-Room *loadRoomFromFile();
 void freeRoom(Room *room);
 int isValidRoomFileName(char *fileName);
 int isValidSeat(Room *room, int seat);

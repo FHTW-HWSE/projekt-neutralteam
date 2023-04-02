@@ -27,19 +27,6 @@ void saveRoomToFile(Room *room) {
     fclose(file);
 }
 
-Room *loadRoomFromFile() {
-    char filename[MAGIC_NUMBER];
-    Room *room = NULL;
-    do {
-        printf("enter filename: ");
-        scanf("%s", filename);
-        if (strcmp(filename, "-abort") == 0) {
-            exit(0);
-        }
-    } while((room = roomFromFile(filename)) == NULL);
-    return room;
-}
-
 void printRoomLayout(Room *room) {
       for (int i = 0; i < room->rows; i++) {
         for (int j = 0; j < room->cols; j++) {
@@ -126,6 +113,8 @@ Room *roomFromFile(char *fileName) {
     }
     if (substringCount < 3) {
         printf("invalid file format\n");
+        free(substrings);
+        freeRoom(room);
         return NULL;
     }
     room->rows = atoi(substrings[0]);
@@ -141,6 +130,8 @@ Room *roomFromFile(char *fileName) {
         char *name = strchr(seatString, ':');
         if (name == NULL) {
             printf("invalid file format\n");
+            free(substrings);
+            freeRoom(room);
             return NULL;
         }
         *name = '\0';
@@ -148,6 +139,8 @@ Room *roomFromFile(char *fileName) {
         int seat = atoi(seatString);
         if (!isValidSeat(room, seat)) {
             printf("invalid file format\n");
+            free(substrings);
+            freeRoom(room);
             return NULL;
         }
         strcpy(room->seats[seat], name);
