@@ -117,50 +117,41 @@ Room *roomFromFile(char *fileName) {
     char fileContent[MORE_MAGICAL_NUMBER];
     fgets(fileContent, MORE_MAGICAL_NUMBER, file);
     fclose(file);
-    char *token = strtok(fileContent, ",");
-    if (token == NULL) {
+    char **substrings = malloc(sizeof(char*) * MORE_MAGICAL_NUMBER);
+    int substringCount = 0;
+    char *substring = strtok(fileContent, ",");
+    while (substring != NULL) {
+        substrings[substringCount++] = substring;
+        substring = strtok(NULL, ",");
+    }
+    if (substringCount < 3) {
         printf("invalid file format\n");
         return NULL;
     }
-    room->rows = atoi(token);
-    token = strtok(NULL, ",");
-    if (token == NULL) {
-        printf("invalid file format\n");
-        return NULL;
-    }
-    room->cols = atoi(token);
-    token = strtok(NULL, ",");
-    if (token == NULL) {
-        printf("invalid file format\n");
-        return NULL;
-    }
-    room->layout = atoi(token);
-    if ( room->layout < 1 || room->layout > 3) {
-        printf("invalid layout\n");
-        return NULL;
-    }
+    room->rows = atoi(substrings[0]);
+    room->cols = atoi(substrings[1]);
+    room->layout = atoi(substrings[2]);
     room->seats = malloc(sizeof(char*) * room->rows * room->cols);
     for (int i = 0; i < room->rows*room->cols; i++) {
         room->seats[i] = malloc(sizeof(char) * MAGIC_NUMBER);
-        strcpy(room->seats[i], "");
+        room->seats[i][0] = '\0';
     }
-    while((token = strtok(NULL, ",")) != NULL) {
-        char *token2 = strtok(token, ":");
-        if (token2 == NULL) {
+    for (int i = 3; i < substringCount; i++) {
+        char *seatString = substrings[i];
+        char *name = strchr(seatString, ':');
+        if (name == NULL) {
             printf("invalid file format\n");
             return NULL;
         }
-        int seat = atoi(token2);
+        *name = '\0';
+        name++;
+        int seat = atoi(seatString);
         if (!isValidSeat(room, seat)) {
-            printf("invalid seat\n");
-            return NULL;
-        }
-        token2 = strtok(NULL, ":");
-        if (token2 == NULL) {
             printf("invalid file format\n");
             return NULL;
         }
-        strcpy(room->seats[seat], token2);
+        strcpy(room->seats[seat], name);
     }
+    free(substrings);
     return room;
 }
