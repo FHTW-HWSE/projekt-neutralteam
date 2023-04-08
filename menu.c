@@ -21,7 +21,7 @@ void menu() {
         scanf("%s", str);
         option = atoi(str);
 
-        if (strcmp(str, "-quit") == 0) {
+        if (strcmp(str, END_PROGRAM_KEYWORD) == 0) {
             exit(0);
         }
     }  while(!isValidOption(option));
@@ -36,7 +36,7 @@ void menu() {
             do {
                 printf("enter filename: ");
                 scanf("%s", filename);
-                if (strcmp(filename, "-quit") == 0) {
+                if (strcmp(filename, END_PROGRAM_KEYWORD) == 0) {
                     exit(0);
                 }
             } while((room = loadRoomFromFile(filename)) == NULL);

@@ -17,7 +17,7 @@ void queryStudents(Room *room) {
         do {
             printf("\nenter student id: ");
             scanf("%s", studentId);
-            if (strcmp(studentId, "-quit") == 0) {
+            if (strcmp(studentId, END_PROGRAM_KEYWORD) == 0) {
                 freeRoom(room);
                 exit(0);
             }

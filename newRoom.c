@@ -31,7 +31,7 @@ void newRoom() {
         printf("enter number of rows: ");
         scanf("%s", str);
         rows = atoi(str);
-        if (strcmp(str, "-quit") == 0) {
+        if (strcmp(str, END_PROGRAM_KEYWORD) == 0) {
             exit(0);
         }
     } while(rows < 1);
@@ -39,7 +39,7 @@ void newRoom() {
         printf("enter number of columns: ");
         scanf("%s", str);
         cols = atoi(str);
-        if (strcmp(str, "-quit") == 0) {
+        if (strcmp(str, END_PROGRAM_KEYWORD) == 0) {
             exit(0);
         }
     } while(cols < 1);
@@ -51,7 +51,7 @@ void newRoom() {
         printf("select layout: ");
         scanf("%s", str);
         layout = atoi(str);
-        if (strcmp(str, "-quit") == 0) {
+        if (strcmp(str, END_PROGRAM_KEYWORD) == 0) {
             exit(0);
         }
     } while(layout < 1 || layout > 3);

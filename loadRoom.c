@@ -23,7 +23,7 @@ void loadRoom(Room *room) {
         printf("select option: ");
         scanf("%s", str);
         option = atoi(str);
-        if (strcmp(str, "-quit") == 0) {
+        if (strcmp(str, END_PROGRAM_KEYWORD) == 0) {
             freeRoom(room);
             exit(0);
         }
