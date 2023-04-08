@@ -146,20 +146,20 @@ int isValidSeat(Room *room, int seat) {
 }
 
 SeatsInUse *getSeatsInUse(Room *room) {
-    SeatsInUse *studentIds = malloc(sizeof(SeatsInUse));
-    studentIds->size = 0;
-    studentIds->seats = malloc(sizeof(Seat) * room->rows*room->cols);
+    SeatsInUse *seatsInUse = malloc(sizeof(SeatsInUse));
+    seatsInUse->size = 0;
+    seatsInUse->seats = malloc(sizeof(Seat) * room->rows*room->cols);
     for (int i = 0; i < room->rows*room->cols; i++) {
         if (isValidSeat(room, i)) {
             if (strlen(room->seats[i]) > 0) {
-                studentIds->seats[studentIds->size].row = i / room->cols;
-                studentIds->seats[studentIds->size].col = i % room->cols;
-                studentIds->seats[studentIds->size].studentId = room->seats[i];
-                studentIds->size++;
+                seatsInUse->seats[seatsInUse->size].row = i / room->cols;
+                seatsInUse->seats[seatsInUse->size].col = i % room->cols;
+                seatsInUse->seats[seatsInUse->size].studentId = room->seats[i];
+                seatsInUse->size++;
             }
         }
     }
-    return studentIds;
+    return seatsInUse;
 }
 
 int isValidRoomFileName(char *fileName) {

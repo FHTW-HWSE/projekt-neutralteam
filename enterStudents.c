@@ -65,17 +65,29 @@ void enterStudents(Room *room) {
                 loadRoom(room);
                 return;
             }
-        } while (!isValidStudentId(studentId));
+        } while (!isValidStudentId(studentId, room));
         strcpy(room->seats[seat], studentId);
    }
 }
 
-int isValidStudentId(char *studentId) {
+int isValidStudentId(char *studentId, Room *room) {
+    char *initialPointerPosition = studentId;
     char c;
-    while((c = *studentId++) != '\0') {
+    while((c = *initialPointerPosition++) != '\0') {
         if (c == '-' || c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == ',')
             return 0;
 
     }
+    SeatsInUse *seatsInUse = getSeatsInUse(room);
+    for (int i = 0; i < seatsInUse->size; i++) {
+        if (strcmp(seatsInUse->seats[i].studentId, studentId) == 0) {
+            printf("  studentId \"%s\" already in use\n", studentId);
+            free(seatsInUse->seats);
+            free(seatsInUse);
+            return 0;
+        }
+    }
+    free(seatsInUse->seats);
+    free(seatsInUse);
     return 1;
 }
