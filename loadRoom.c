@@ -29,11 +29,11 @@ void loadRoom(Room *room) {
         }
     } while(!isValidOption(option));
     switch (option) {
-        case 1:
-            queryStudents(room);
-            break;
-        case 2:
-            enterStudents(room);
-            break;
+    case 1:
+        queryStudents(room);
+        break;
+    case 2:
+        enterStudents(room);
+        break;
     }
 }

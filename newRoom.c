@@ -23,7 +23,6 @@ Room *genRoom(int rows, int cols, int layout) {
 
 void newRoom() {
     printf("\nnew room\n");
-    
     char str[MAGIC_NUMBER] = "0";
     int rows = 0;
     int cols = 0;
@@ -36,7 +35,6 @@ void newRoom() {
             exit(0);
         }
     } while(rows < 1);
-
     do {
         printf("enter number of columns: ");
         scanf("%s", str);
@@ -45,12 +43,10 @@ void newRoom() {
             exit(0);
         }
     } while(cols < 1);
-
     printf("\nroom layout\n");
     printf("  100%%\t[1]\n");
     printf("  50%%\t[2]\n");
     printf("  25%%\t[3]\n");
-
     do {
         printf("select layout: ");
         scanf("%s", str);
@@ -59,7 +55,6 @@ void newRoom() {
             exit(0);
         }
     } while(layout < 1 || layout > 3);
-
     Room *room = genRoom(rows, cols, layout);
     printf("\nroom created\n");
     char filename[MAGIC_NUMBER];

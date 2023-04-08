@@ -16,10 +16,8 @@ void enterStudents(Room *room) {
         }
     }
     printf("\nconfirm with -save\n");
-
-   while(1) {
+    while(1) {
         printf("\n");
-
         int seat = 0;
         char seatString[MAGIC_NUMBER] = "";
         do {
@@ -45,7 +43,6 @@ void enterStudents(Room *room) {
             }
             seat = atoi(seatString);
         } while (!isValidSeat(room, seat));
-
         char studentId[MAGIC_NUMBER] = "";
         do {
             printf("enter student id: ");
@@ -76,7 +73,7 @@ void enterStudents(Room *room) {
 int isValidStudentId(char *studentId) {
     char c;
     while((c = *studentId++) != '\0') {
-        if (c == '-')
+        if (c == '-' || c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == ',')
             return 0;
 
     }

@@ -9,6 +9,30 @@
 #include "directNeighbors.h"
 #include "indirectNeighbors.h"
 
+void queryStudents(Room *room) {
+    printf("\nquery students\n");
+    printSeatsInUse(room);
+    while(1) {
+        char studentId[MAGIC_NUMBER];
+        do {
+            printf("\nenter student id: ");
+            scanf("%s", studentId);
+            if (strcmp(studentId, "-abort") == 0) {
+                freeRoom(room);
+                exit(0);
+            }
+        } while(!isValidStudentId(studentId));
+        int seat = getSeatByStudentId(room, studentId);
+        if (seat == -1) {
+            printf("student not found\n");
+        } else {
+            printf("student found at seat %d\n", seat);
+            printNeighbors(room, seat);
+        }
+    }
+    freeRoom(room);
+}
+
 int getSeatByStudentId(Room *room, char *studentId) {
     for (int i = 0; i < room->rows*room->cols; i++) {
         if (isValidSeat(room, i)) {
@@ -48,28 +72,4 @@ void printNeighbors(Room *room, int seat) {
     printBottomLeftLeftSeat(room, seat);
     printLeftLeftSeat(room, seat);
     printTopLeftLeftSeat(room, seat);
-}
-
-void queryStudents(Room *room) {
-    printf("\nquery students\n");
-    printStudentIds(room);
-    while(1) {
-        char studentId[MAGIC_NUMBER];
-        do {
-            printf("\nenter student id: ");
-            scanf("%s", studentId);
-            if (strcmp(studentId, "-abort") == 0) {
-                freeRoom(room);
-                exit(0);
-            }
-        } while(!isValidStudentId(studentId));
-        int seat = getSeatByStudentId(room, studentId);
-        if (seat == -1) {
-            printf("student not found\n");
-        } else {
-            printf("student found at seat %d\n", seat);
-            printNeighbors(room, seat);
-        }
-    }
-    freeRoom(room);
 }

@@ -27,22 +27,22 @@ void menu() {
     }  while(!isValidOption(option));
 
     switch (option) {
-        case 1:
-            newRoom();
-            break;
-        case 2: {
-                char filename[MAGIC_NUMBER];
-                Room *room = NULL;
-                do {
-                    printf("enter filename: ");
-                    scanf("%s", filename);
-                    if (strcmp(filename, "-abort") == 0) {
-                        exit(0);
-                    }
-                } while((room = roomFromFile(filename)) == NULL);
-                loadRoom(room); 
-            }
-            break;
+    case 1:
+        newRoom();
+        break;
+    case 2: {
+            char filename[MAGIC_NUMBER];
+            Room *room = NULL;
+            do {
+                printf("enter filename: ");
+                scanf("%s", filename);
+                if (strcmp(filename, "-abort") == 0) {
+                    exit(0);
+                }
+            } while((room = loadRoomFromFile(filename)) == NULL);
+            loadRoom(room); 
+        }
+        break;
     }
 }
 
