@@ -6,7 +6,7 @@
 #include "main.h"
 #include "room.h"
 #include "newRoom.h"
-#include "loadRoom.h"
+#include "enterStudents.h"
 
 Room *genRoom(int rows, int cols, int layout) {
     Room *room = malloc(sizeof(Room));
@@ -57,15 +57,5 @@ void newRoom() {
     } while(layout < 1 || layout > 3);
     Room *room = genRoom(rows, cols, layout);
     printf("\nroom created\n");
-    char filename[MAGIC_NUMBER];
-    do {
-        printf("enter filename: ");
-        scanf("%s", filename);
-        if (strcmp(filename, "-abort") == 0) {
-            freeRoom(room);
-            exit(0);
-        }
-    } while(!isValidRoomFileName(filename));
-    saveRoomToFile(room, filename);
-    loadRoom(room);
+    enterStudents(room);
 }
