@@ -16,7 +16,6 @@ void loadRoom(Room *room) {
     printf("\nwhat do you want to do?\n");
     printf("  query students  [1]\n");
     printf("  enter students  [2]\n");
-
     char str[MAGIC_NUMBER] = "0";
     int option = 0;
     do {

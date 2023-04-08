@@ -17,15 +17,12 @@ void menu() {
         printf("  new\t[1]\n");
         printf("  load\t[2]\n");
         printf("select option: ");
-
         scanf("%s", str);
         option = atoi(str);
-
         if (strcmp(str, END_PROGRAM_KEYWORD) == 0) {
             exit(0);
         }
     }  while(!isValidOption(option));
-
     switch (option) {
     case 1:
         newRoom();

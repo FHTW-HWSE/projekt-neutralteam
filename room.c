@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #include "room.h"
 #include "main.h"
@@ -164,8 +165,11 @@ SeatsInUse *getSeatsInUse(Room *room) {
 
 int isValidRoomFileName(char *fileName) {
     char c;
+    if (strcmp(fileName, ".") == 0 || strcmp(fileName, "..") == 0) {
+        return 0;
+    }
     while((c = *fileName++) != '\0') {
-        if (c == '.' || c == '/' || c == '\\')
+        if (! (c == '.' || isalnum(c)) ) 
             return 0;
     }
     return 1;
