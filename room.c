@@ -67,12 +67,12 @@ void saveRoomToFile(Room *room, char *fileName) {
 }
 
 void printSeatsInUse(Room *room) {
-    SeatsInUse *studentIds = getSeatsInUse(room);
-    for (int i = 0; i < studentIds->size; i++) {
-        printf("%d: %s\n", studentIds->seats[i].row*room->cols+studentIds->seats[i].col, studentIds->seats[i].studentId);
+    SeatsInUse *seatsInUse = getSeatsInUse(room);
+    for (int i = 0; i < seatsInUse->size; i++) {
+        printf("%d: %s\n", seatsInUse->seats[i].row*room->cols+seatsInUse->seats[i].col, seatsInUse->seats[i].studentId);
     }
-    free(studentIds->seats);
-    free(studentIds);
+    free(seatsInUse->seats);
+    free(seatsInUse);
 }
 
 void printRoomLayout(Room *room) {
