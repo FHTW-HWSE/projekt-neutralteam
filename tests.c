@@ -7,12 +7,12 @@
 void callTests() {
     printf("running tests...\n");
     pthread_t thread0;
-    pthread_create(&thread0, NULL, testIsValidRoomFileName, NULL);
+    pthread_create(&thread0, NULL, isValidRoomFileNameTests, NULL);
     pthread_join(thread0, NULL);
     printf("tests complete\n");
 }   
 
-void *testIsValidRoomFileName() {
+void *isValidRoomFileNameTests() {
     printf("testing isValidRoomFileName...\n");
     //test case 1
     callIsValidRoomFileName("testName", 1);
@@ -27,7 +27,6 @@ void *testIsValidRoomFileName() {
     printf("isValidRoomFileName test complete\n");
     return NULL;
 }
-
 void callIsValidRoomFileName(char *fileName, int expected) {
     int actual = isValidRoomFileName(fileName);
     if (actual != expected) {

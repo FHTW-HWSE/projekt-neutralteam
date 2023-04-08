@@ -6,6 +6,37 @@
 #include "room.h"
 #include "main.h"
 
+void saveRoomToFile(Room *room, char *fileName) {
+    FILE *file = fopen(fileName, "w");
+    char *roomString = roomToString(room);
+    fprintf(file, "%s", roomString);
+    free(roomString);
+    fclose(file);
+}
+
+void printSeatsInUse(Room *room) {
+    SeatsInUse *seatsInUse = getSeatsInUse(room);
+    for (int i = 0; i < seatsInUse->size; i++) {
+        printf("%d: %s\n", seatsInUse->seats[i].row*room->cols+seatsInUse->seats[i].col, seatsInUse->seats[i].studentId);
+    }
+    free(seatsInUse->seats);
+    free(seatsInUse);
+}
+
+void printRoomLayout(Room *room) {
+    char *roomLayoutString = getRoomLayoutString(room);
+    printf("%s", roomLayoutString);
+    free(roomLayoutString);
+}
+
+void freeRoom(Room *room) {
+    for (int i = 0; i < room->rows*room->cols; i++) {
+        free(room->seats[i]);
+    }
+    free(room->seats);
+    free(room);
+}
+
 Room *loadRoomFromFile(char *fileName) {
     char *fileContent = getFileContent(fileName);
     if (fileContent == NULL) {
@@ -58,39 +89,6 @@ Room *loadRoomFromFile(char *fileName) {
     free(fileContent);
     return room;
 }
-
-void saveRoomToFile(Room *room, char *fileName) {
-    FILE *file = fopen(fileName, "w");
-    char *roomString = roomToString(room);
-    fprintf(file, "%s", roomString);
-    free(roomString);
-    fclose(file);
-}
-
-void printSeatsInUse(Room *room) {
-    SeatsInUse *seatsInUse = getSeatsInUse(room);
-    for (int i = 0; i < seatsInUse->size; i++) {
-        printf("%d: %s\n", seatsInUse->seats[i].row*room->cols+seatsInUse->seats[i].col, seatsInUse->seats[i].studentId);
-    }
-    free(seatsInUse->seats);
-    free(seatsInUse);
-}
-
-void printRoomLayout(Room *room) {
-    char *roomLayoutString = getRoomLayoutString(room);
-    printf("%s", roomLayoutString);
-    free(roomLayoutString);
-}
-
-void freeRoom(Room *room) {
-    for (int i = 0; i < room->rows*room->cols; i++) {
-        free(room->seats[i]);
-    }
-    free(room->seats);
-    free(room);
-}
-
-
 
 char *roomToString(Room *room) {
     char *roomString = malloc(sizeof(char) * MORE_MAGICAL_NUMBER);

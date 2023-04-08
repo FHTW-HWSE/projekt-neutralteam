@@ -8,7 +8,6 @@
 #include "newRoom.h"
 #include "loadRoom.h"
 
-
 void menu() {
     char str[MAGIC_NUMBER] = "0";
     int option = 0;

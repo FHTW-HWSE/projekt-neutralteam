@@ -8,19 +8,6 @@
 #include "newRoom.h"
 #include "enterStudents.h"
 
-Room *genRoom(int rows, int cols, int layout) {
-    Room *room = malloc(sizeof(Room));
-    room->rows = rows;
-    room->cols = cols;
-    room->layout = layout;
-    room->seats = malloc(sizeof(char*) * rows * cols);
-    for (int i = 0; i < rows*cols; i++) {
-        room->seats[i] = malloc(sizeof(char) * MAGIC_NUMBER);
-        strcpy(room->seats[i], "");
-    }
-    return room;
-}
-
 void newRoom() {
     printf("\nnew room\n");
     char str[MAGIC_NUMBER] = "0";
@@ -58,4 +45,17 @@ void newRoom() {
     Room *room = genRoom(rows, cols, layout);
     printf("\nroom created\n");
     enterStudents(room);
+}
+
+Room *genRoom(int rows, int cols, int layout) {
+    Room *room = malloc(sizeof(Room));
+    room->rows = rows;
+    room->cols = cols;
+    room->layout = layout;
+    room->seats = malloc(sizeof(char*) * rows * cols);
+    for (int i = 0; i < rows*cols; i++) {
+        room->seats[i] = malloc(sizeof(char) * MAGIC_NUMBER);
+        strcpy(room->seats[i], "");
+    }
+    return room;
 }

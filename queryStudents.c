@@ -33,17 +33,6 @@ void queryStudents(Room *room) {
     freeRoom(room);
 }
 
-int getSeatByStudentId(Room *room, char *studentId) {
-    for (int i = 0; i < room->rows*room->cols; i++) {
-        if (isValidSeat(room, i)) {
-            if (strcmp(room->seats[i], studentId) == 0) {
-                return i;
-            }
-        }
-    }
-    return -1;
-}
-
 void printNeighbors(Room *room, int seat) {
     printf("\ndirect neighbors: \n");
     printTopLeftSeat(room, seat);
@@ -72,4 +61,15 @@ void printNeighbors(Room *room, int seat) {
     printBottomLeftLeftSeat(room, seat);
     printLeftLeftSeat(room, seat);
     printTopLeftLeftSeat(room, seat);
+}
+
+int getSeatByStudentId(Room *room, char *studentId) {
+    for (int i = 0; i < room->rows*room->cols; i++) {
+        if (isValidSeat(room, i)) {
+            if (strcmp(room->seats[i], studentId) == 0) {
+                return i;
+            }
+        }
+    }
+    return -1;
 }

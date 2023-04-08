@@ -1,6 +1,6 @@
 #ifndef TESTS_H
 #define TESTS_H
 void callTests();
-void *testIsValidRoomFileName();
+void *isValidRoomFileNameTests();
 void callIsValidRoomFileName(char *fileName, int expected);
 #endif
