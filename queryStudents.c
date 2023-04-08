@@ -14,12 +14,14 @@ void queryStudents(Room *room) {
     printSeatsInUse(room);
     while(1) {
         char studentId[MAGIC_NUMBER];
-        printf("\nenter student id: ");
-        scanf("%s", studentId);
-        if (strcmp(studentId, "-abort") == 0) {
-            freeRoom(room);
-            exit(0);
-        }
+        do {
+            printf("\nenter student id: ");
+            scanf("%s", studentId);
+            if (strcmp(studentId, "-abort") == 0) {
+                freeRoom(room);
+                exit(0);
+            }
+        } while(!isValidStudentId(studentId));
         int seat = getSeatByStudentId(room, studentId);
         if (seat == -1) {
             printf("student not found\n");
