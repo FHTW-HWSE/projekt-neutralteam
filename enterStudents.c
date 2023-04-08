@@ -23,7 +23,7 @@ void enterStudents(Room *room) {
         do {
             printf("enter seat: ");
             scanf("%s", seatString);
-            if (strcmp(seatString, "-abort") == 0) {
+            if (strcmp(seatString, "-quit") == 0) {
                 freeRoom(room);
                 exit(0);
             }
@@ -32,7 +32,7 @@ void enterStudents(Room *room) {
                 do {
                     printf("enter filename: ");
                     scanf("%s", filename);
-                    if (strcmp(filename, "-abort") == 0) {
+                    if (strcmp(filename, "-quit") == 0) {
                         freeRoom(room);
                         exit(0);
                     }
@@ -47,7 +47,7 @@ void enterStudents(Room *room) {
         while(1) {
             printf("enter student id: ");
             scanf("%s", studentId);
-            if (strcmp(studentId, "-abort") == 0) {
+            if (strcmp(studentId, "-quit") == 0) {
                 freeRoom(room);
                 exit(0);
             }
@@ -56,7 +56,7 @@ void enterStudents(Room *room) {
                 do {
                     printf("enter filename: ");
                     scanf("%s", filename);
-                    if (strcmp(filename, "-abort") == 0) {
+                    if (strcmp(filename, "-quit") == 0) {
                         freeRoom(room);
                         exit(0);
                     }
@@ -65,7 +65,7 @@ void enterStudents(Room *room) {
                 loadRoom(room);
                 return;
             }
-            if (strcmp(studentId, "-seat") == 0) {
+            if (strcmp(studentId, "-abort") == 0) {
                 break;
             }
             if (isValidStudentId(studentId)) {
