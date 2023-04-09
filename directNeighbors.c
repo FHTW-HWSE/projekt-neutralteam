@@ -3,99 +3,67 @@
 
 #include "directNeighbors.h"
 
-void printTopLeftSeat(Room *room, int seat) {
+int getTopLeftSeat(Room *room, int seat) {
     int row = seat / room->cols;
     int col = seat % room->cols;
     if (row > 0 && col > 0) {
-        int topLeftSeat = (row-1)*room->cols + (col-1);
-        if (isValidSeat(room, topLeftSeat)) {
-            if (strlen(room->seats[topLeftSeat]) > 0) {
-                printf("%s: %d\n", room->seats[topLeftSeat], topLeftSeat);
-            }
-        }
+        return (row-1)*room->cols + (col-1);
     }
+    return -1;
 }
-void printTopSeat(Room *room, int seat) {
+int getTopSeat(Room *room, int seat) {
     int row = seat / room->cols;
     int col = seat % room->cols;
     if (row > 0) {
-        int topSeat = (row-1)*room->cols + col;
-        if (isValidSeat(room, topSeat)) {
-            if (strlen(room->seats[topSeat]) > 0) {
-                printf("%s: %d\n", room->seats[topSeat], topSeat);
-            }
-        }
+        return (row-1)*room->cols + col;
     }
+    return -1;
 }
-void printTopRightSeat(Room *room, int seat) {
+int getTopRightSeat(Room *room, int seat) {
     int row = seat / room->cols;
     int col = seat % room->cols;
     if (row > 0 && col < room->cols-1) {
-        int topRightSeat = (row-1)*room->cols + (col+1);
-        if (isValidSeat(room, topRightSeat)) {
-            if (strlen(room->seats[topRightSeat]) > 0) {
-                printf("%s: %d\n", room->seats[topRightSeat], topRightSeat);
-            }
-        }
+        return (row-1)*room->cols + (col+1);
     }
+    return -1;
 }
-void printRightSeat(Room *room, int seat) {
+int getRightSeat(Room *room, int seat) {
     int row = seat / room->cols;
     int col = seat % room->cols;
     if (col < room->cols-1) {
-        int rightSeat = row*room->cols + (col+1);
-        if (isValidSeat(room, rightSeat)) {
-            if (strlen(room->seats[rightSeat]) > 0) {
-                printf("%s: %d\n", room->seats[rightSeat], rightSeat);
-            }
-        }
+        return row*room->cols + (col+1);
     }
+    return -1;
 }
-void printBottomRightSeat(Room *room, int seat) {
+int getBottomRightSeat(Room *room, int seat) {
     int row = seat / room->cols;
     int col = seat % room->cols;
     if (row < room->rows-1 && col < room->cols-1) {
-        int bottomRightSeat = (row+1)*room->cols + (col+1);
-        if (isValidSeat(room, bottomRightSeat)) {
-            if (strlen(room->seats[bottomRightSeat]) > 0) {
-                printf("%s: %d\n", room->seats[bottomRightSeat], bottomRightSeat);
-            }
-        }
+        return (row+1)*room->cols + (col+1);
     }
+    return -1;
 }
-void printBottomSeat(Room *room, int seat) {
+int getBottomSeat(Room *room, int seat) {
     int row = seat / room->cols;
     int col = seat % room->cols;
     if (row < room->rows-1) {
-        int bottomSeat = (row+1)*room->cols + col;
-        if (isValidSeat(room, bottomSeat)) {
-            if (strlen(room->seats[bottomSeat]) > 0) {
-                printf("%s: %d\n", room->seats[bottomSeat], bottomSeat);
-            }
-        }
+        return (row+1)*room->cols + col;
     }
+    return -1;
 }
-void printBottomLeftSeat(Room *room, int seat) {
+int getBottomLeftSeat(Room *room, int seat) {
     int row = seat / room->cols;
     int col = seat % room->cols;
     if (row < room->rows-1 && col > 0) {
-        int bottomLeftSeat = (row+1)*room->cols + (col-1);
-        if (isValidSeat(room, bottomLeftSeat)) {
-            if (strlen(room->seats[bottomLeftSeat]) > 0) {
-                printf("%s: %d\n", room->seats[bottomLeftSeat], bottomLeftSeat);
-            }
-        }
+        return (row+1)*room->cols + (col-1);
     }
+    return -1;
 }
-void printLeftSeat(Room *room, int seat) {
+int getLeftSeat(Room *room, int seat) {
     int row = seat / room->cols;
     int col = seat % room->cols;
     if (col > 0) {
-        int leftSeat = row*room->cols + (col-1);
-        if (isValidSeat(room, leftSeat)) {
-            if (strlen(room->seats[leftSeat]) > 0) {
-                printf("%s: %d\n", room->seats[leftSeat], leftSeat);
-            }
-        }
+        return row*room->cols + (col-1);
     }
+    return -1;
 }

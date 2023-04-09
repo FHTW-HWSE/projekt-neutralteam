@@ -8,6 +8,7 @@ void callTests() {
     printf("running tests...\n");
     pthread_t thread0;
     pthread_create(&thread0, NULL, isValidRoomFileNameTests, NULL);
+    
     pthread_join(thread0, NULL);
     printf("tests complete\n");
 }   

@@ -90,6 +90,17 @@ Room *loadRoomFromFile(char *fileName) {
     return room;
 }
 
+char *getFileContent(char *fileName) {
+    FILE *file = fopen(fileName, "r");
+    if (file == NULL) {
+        return NULL;
+    }
+    char *fileContent = malloc(sizeof(char) * MORE_MAGICAL_NUMBER);
+    fgets(fileContent, MORE_MAGICAL_NUMBER, file);
+    fclose(file);
+    return fileContent;
+}
+
 char *roomToString(Room *room) {
     char *roomString = malloc(sizeof(char) * MORE_MAGICAL_NUMBER);
     sprintf(roomString, "%d,%d,%d", room->rows, room->cols, room->layout);
@@ -171,15 +182,4 @@ int isValidRoomFileName(char *fileName) {
             return 0;
     }
     return 1;
-}
-
-char *getFileContent(char *fileName) {
-    FILE *file = fopen(fileName, "r");
-    if (file == NULL) {
-        return NULL;
-    }
-    char *fileContent = malloc(sizeof(char) * MORE_MAGICAL_NUMBER);
-    fgets(fileContent, MORE_MAGICAL_NUMBER, file);
-    fclose(file);
-    return fileContent;
 }

@@ -1,20 +1,20 @@
 #ifndef INDIRECTNEIGHBORS_H
 #define INDIRECTNEIGHBORS_H
 #include "room.h"
-void printTopTopLeftLeftSeat(Room *room, int seat);
-void printTopTopLeftSeat(Room *room, int seat);
-void printTopTopSeat(Room *room, int seat);
-void printTopTopRightSeat(Room *room, int seat);
-void printTopTopRightRightSeat(Room *room, int seat);
-void printTopRightRightSeat(Room *room, int seat);
-void printRightRightSeat(Room *room, int seat);
-void printBottomRightRightSeat(Room *room, int seat);
-void printBottomBottomRightRightSeat(Room *room, int seat);
-void printBottomBottomRightSeat(Room *room, int seat);
-void printBottomBottomSeat(Room *room, int seat);
-void printBottomBottomLeftSeat(Room *room, int seat);
-void printBottomBottomLeftLeftSeat(Room *room, int seat);
-void printBottomLeftLeftSeat(Room *room, int seat);
-void printLeftLeftSeat(Room *room, int seat);
-void printTopLeftLeftSeat(Room *room, int seat);
+int getTopTopLeftLeftSeat(Room *room, int seat);
+int getTopTopLeftSeat(Room *room, int seat);
+int getTopTopSeat(Room *room, int seat);
+int getTopTopRightSeat(Room *room, int seat);
+int getTopTopRightRightSeat(Room *room, int seat);
+int getTopRightRightSeat(Room *room, int seat);
+int getRightRightSeat(Room *room, int seat);
+int getBottomRightRightSeat(Room *room, int seat);
+int getBottomBottomRightRightSeat(Room *room, int seat);
+int getBottomBottomRightSeat(Room *room, int seat);
+int getBottomBottomSeat(Room *room, int seat);
+int getBottomBottomLeftSeat(Room *room, int seat);
+int getBottomBottomLeftLeftSeat(Room *room, int seat);
+int getBottomLeftLeftSeat(Room *room, int seat);
+int getLeftLeftSeat(Room *room, int seat);
+int getTopLeftLeftSeat(Room *room, int seat);
 #endif
