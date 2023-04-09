@@ -7,6 +7,7 @@
 #include "main.h"
 #include "room.h"
 #include "menu.h"
+#include "newRoom.h"
 #include "enterStudents.h"
 #include "queryStudents.h"
 
@@ -43,7 +44,6 @@ Room *loadRoomFromFile(char *fileName) {
         printf("file not found\n");
         return NULL;
     }
-    Room *room = malloc(sizeof(Room));
     char **fileContentSubstrings = malloc(sizeof(char*) * MORE_MAGICAL_NUMBER);
     int substringCount = 0;
     char *substring = strtok(fileContent, ",");
@@ -54,24 +54,23 @@ Room *loadRoomFromFile(char *fileName) {
     if (substringCount < 3) {
         printf("invalid file format\n");
         free(fileContentSubstrings);
-        freeRoom(room);
         return NULL;
     }
-    room->rows = atoi(fileContentSubstrings[0]);
-    room->cols = atoi(fileContentSubstrings[1]);
-    room->layout = atoi(fileContentSubstrings[2]);
-    room->seats = malloc(sizeof(char*) * room->rows * room->cols);
-    for (int i = 0; i < room->rows*room->cols; i++) {
-        room->seats[i] = malloc(sizeof(char) * MAGIC_NUMBER);
-        room->seats[i][0] = '\0';
+    int rows = atoi(fileContentSubstrings[0]);
+    int cols = atoi(fileContentSubstrings[1]);
+    int layout = atoi(fileContentSubstrings[2]);
+    if (rows < 1 || cols < 1 || layout < 1 || layout > 3) {
+        printf("invalid file format\n");
+        free(fileContentSubstrings);
+        return NULL;
     }
+    Room *room = genRoom(rows, cols, layout);
     for (int i = 3; i < substringCount; i++) {
         char *seatString = fileContentSubstrings[i];
         char *name = strchr(seatString, ':');
         if (name == NULL) {
             printf("invalid file format\n");
             free(fileContentSubstrings);
-            freeRoom(room);
             return NULL;
         }
         *name = '\0';
@@ -80,7 +79,6 @@ Room *loadRoomFromFile(char *fileName) {
         if (!isValidSeat(room, seat)) {
             printf("invalid file format\n");
             free(fileContentSubstrings);
-            freeRoom(room);
             return NULL;
         }
         strcpy(room->seats[seat], name);
