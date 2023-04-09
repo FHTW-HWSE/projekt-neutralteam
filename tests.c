@@ -2,7 +2,7 @@
 #include <pthread.h>
 
 #include "tests.h"
-#include "room.h"
+#include "enterStudents.h"
 
 void callTests() {
     printf("running tests...\n");

@@ -36,3 +36,56 @@ void loadRoom(Room *room) {
         break;
     }
 }
+
+Room *loadRoomFromFile(char *fileName) {
+    char *fileContent = getFileContent(fileName);
+    if (fileContent == NULL) {
+        printf("file not found\n");
+        return NULL;
+    }
+    Room *room = malloc(sizeof(Room));
+    char **fileContentSubstrings = malloc(sizeof(char*) * MORE_MAGICAL_NUMBER);
+    int substringCount = 0;
+    char *substring = strtok(fileContent, ",");
+    while (substring != NULL) {
+        fileContentSubstrings[substringCount++] = substring;
+        substring = strtok(NULL, ",");
+    }
+    if (substringCount < 3) {
+        printf("invalid file format\n");
+        free(fileContentSubstrings);
+        freeRoom(room);
+        return NULL;
+    }
+    room->rows = atoi(fileContentSubstrings[0]);
+    room->cols = atoi(fileContentSubstrings[1]);
+    room->layout = atoi(fileContentSubstrings[2]);
+    room->seats = malloc(sizeof(char*) * room->rows * room->cols);
+    for (int i = 0; i < room->rows*room->cols; i++) {
+        room->seats[i] = malloc(sizeof(char) * MAGIC_NUMBER);
+        room->seats[i][0] = '\0';
+    }
+    for (int i = 3; i < substringCount; i++) {
+        char *seatString = fileContentSubstrings[i];
+        char *name = strchr(seatString, ':');
+        if (name == NULL) {
+            printf("invalid file format\n");
+            free(fileContentSubstrings);
+            freeRoom(room);
+            return NULL;
+        }
+        *name = '\0';
+        name++;
+        int seat = atoi(seatString);
+        if (!isValidSeat(room, seat)) {
+            printf("invalid file format\n");
+            free(fileContentSubstrings);
+            freeRoom(room);
+            return NULL;
+        }
+        strcpy(room->seats[seat], name);
+    }
+    free(fileContentSubstrings);
+    free(fileContent);
+    return room;
+}

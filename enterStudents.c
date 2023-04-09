@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #include "enterStudents.h"
 #include "loadRoom.h"
@@ -84,9 +85,22 @@ void enterStudents(Room *room) {
 int isValidStudentId(char *studentId) {
     char c;
     while((c = *studentId++) != '\0') {
-        if (c == '-' || c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == ',')
+        if (c == '\t' || c == '\n' || c == '\r' || c == ',' || c == ':')
             return 0;
 
+    }
+    return 1;
+}
+
+
+int isValidRoomFileName(char *fileName) {
+    char c;
+    if (strcmp(fileName, ".") == 0 || strcmp(fileName, "..") == 0) {
+        return 0;
+    }
+    while((c = *fileName++) != '\0') {
+        if (! (c == '.' || isalnum(c)) ) 
+            return 0;
     }
     return 1;
 }
