@@ -18,7 +18,6 @@ typedef struct SeatsInUse {
 char *getRoomLayoutString(Room *room);
 void printRoomLayout(Room *room);
 void saveRoomToFile(Room *room, char *fileName);
-char *getFileContent(char *fileName);
 void freeRoom(Room *room);
 int isValidSeat(Room *room, int seat);
 SeatsInUse *getSeatsInUse(Room *room);

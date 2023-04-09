@@ -20,7 +20,7 @@ void enterStudents(Room *room) {
     while(1) {
         printf("\n");
         int seat = 0;
-        char seatString[MAGIC_NUMBER] = "";
+        char seatString[SMALL_MAGIC_NUMBER] = "";
         do {
             printf("enter seat: ");
             scanf("%s", seatString);
@@ -29,7 +29,7 @@ void enterStudents(Room *room) {
                 exit(0);
             }
             if (strcmp(seatString, "-save") == 0) {
-                char filename[MAGIC_NUMBER];
+                char filename[SMALL_MAGIC_NUMBER];
                 do {
                     printf("enter filename: ");
                     scanf("%s", filename);
@@ -44,7 +44,7 @@ void enterStudents(Room *room) {
             }
             seat = atoi(seatString);
         } while (!isValidSeat(room, seat));
-        char studentId[MAGIC_NUMBER] = "";
+        char studentId[SMALL_MAGIC_NUMBER] = "";
         while(1) {
             printf("enter student id: ");
             scanf("%s", studentId);
@@ -53,7 +53,7 @@ void enterStudents(Room *room) {
                 exit(0);
             }
             if (strcmp(studentId, "-save") == 0) {
-                char filename[MAGIC_NUMBER];
+                char filename[SMALL_MAGIC_NUMBER];
                 do {
                     printf("enter filename: ");
                     scanf("%s", filename);

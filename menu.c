@@ -9,7 +9,7 @@
 #include "loadRoom.h"
 
 void menu() {
-    char str[MAGIC_NUMBER] = "0";
+    char str[SMALL_MAGIC_NUMBER] = "0";
     int option = 0;
     do {
         printf("\nmenu\n");
@@ -27,7 +27,7 @@ void menu() {
         newRoom();
         break;
     case 2: {
-            char filename[MAGIC_NUMBER];
+            char filename[SMALL_MAGIC_NUMBER];
             Room *room = NULL;
             do {
                 printf("enter filename: ");

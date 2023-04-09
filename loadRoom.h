@@ -3,4 +3,5 @@
 #include "room.h"
 void loadRoom(Room *room);
 Room *loadRoomFromFile(char *fileName);
+char *getFileContent(char *fileName);
 #endif

@@ -5,7 +5,6 @@
 #include "loadRoom.h"
 
 #include "main.h"
-#include "room.h"
 #include "menu.h"
 #include "newRoom.h"
 #include "enterStudents.h"
@@ -17,7 +16,7 @@ void loadRoom(Room *room) {
     printf("\nwhat do you want to do?\n");
     printf("  query students  [1]\n");
     printf("  enter students  [2]\n");
-    char str[MAGIC_NUMBER] = "0";
+    char str[SMALL_MAGIC_NUMBER] = "0";
     int option = 0;
     do {
         printf("select option: ");
@@ -44,7 +43,7 @@ Room *loadRoomFromFile(char *fileName) {
         printf("file not found\n");
         return NULL;
     }
-    char **fileContentSubstrings = malloc(sizeof(char*) * MORE_MAGICAL_NUMBER);
+    char **fileContentSubstrings = malloc(sizeof(char*) * BIG_MAGIC_NUMBER);
     int substringCount = 0;
     char *substring = strtok(fileContent, ",");
     while (substring != NULL) {
@@ -86,4 +85,15 @@ Room *loadRoomFromFile(char *fileName) {
     free(fileContentSubstrings);
     free(fileContent);
     return room;
+}
+
+char *getFileContent(char *fileName) {
+    FILE *file = fopen(fileName, "r");
+    if (file == NULL) {
+        return NULL;
+    }
+    char *fileContent = malloc(sizeof(char) * BIG_MAGIC_NUMBER);
+    fgets(fileContent, BIG_MAGIC_NUMBER, file);
+    fclose(file);
+    return fileContent;
 }

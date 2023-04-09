@@ -36,24 +36,13 @@ void freeRoom(Room *room) {
     free(room);
 }
 
-char *getFileContent(char *fileName) {
-    FILE *file = fopen(fileName, "r");
-    if (file == NULL) {
-        return NULL;
-    }
-    char *fileContent = malloc(sizeof(char) * MORE_MAGICAL_NUMBER);
-    fgets(fileContent, MORE_MAGICAL_NUMBER, file);
-    fclose(file);
-    return fileContent;
-}
-
 char *roomToString(Room *room) {
-    char *roomString = malloc(sizeof(char) * MORE_MAGICAL_NUMBER);
+    char *roomString = malloc(sizeof(char) * BIG_MAGIC_NUMBER);
     sprintf(roomString, "%d,%d,%d", room->rows, room->cols, room->layout);
     for (int i = 0; i < room->rows; i++) {
         for (int j = 0; j < room->cols; j++) {
             if(strlen(room->seats[i*room->cols+j]) > 0) {
-                char *seatString = malloc(sizeof(char) * MORE_MAGICAL_NUMBER);
+                char *seatString = malloc(sizeof(char) * BIG_MAGIC_NUMBER);
                 sprintf(seatString, ",%d:%s", i*room->cols+j, room->seats[i*room->cols+j]);
                 strcat(roomString, seatString);
                 free(seatString);
@@ -64,7 +53,7 @@ char *roomToString(Room *room) {
 }
 
 char *getRoomLayoutString(Room *room) {
-    char *roomLayoutString = malloc(sizeof(char) * MORE_MAGICAL_NUMBER);
+    char *roomLayoutString = malloc(sizeof(char) * BIG_MAGIC_NUMBER);
     int currentIndex = 0;
     for (int i = 0; i < room->rows; i++) {
         for (int j = 0; j < room->cols; j++) {

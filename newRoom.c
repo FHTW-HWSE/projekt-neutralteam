@@ -9,7 +9,7 @@
 
 void newRoom() {
     printf("\nnew room\n");
-    char str[MAGIC_NUMBER] = "0";
+    char str[SMALL_MAGIC_NUMBER] = "0";
     int rows = 0;
     int cols = 0;
     int layout = 0;
@@ -53,7 +53,7 @@ Room *genRoom(int rows, int cols, int layout) {
     room->layout = layout;
     room->seats = malloc(sizeof(char*) * rows * cols);
     for (int i = 0; i < rows*cols; i++) {
-        room->seats[i] = malloc(sizeof(char) * MAGIC_NUMBER);
+        room->seats[i] = malloc(sizeof(char) * SMALL_MAGIC_NUMBER);
         strcpy(room->seats[i], "");
     }
     return room;
