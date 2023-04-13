@@ -1,0 +1,4 @@
+/home/fabian/programming/projekt-neutralteam/CMakeFiles/PROGRAMM.dir
+/home/fabian/programming/projekt-neutralteam/CMakeFiles/TEST.dir
+/home/fabian/programming/projekt-neutralteam/CMakeFiles/edit_cache.dir
+/home/fabian/programming/projekt-neutralteam/CMakeFiles/rebuild_cache.dir
