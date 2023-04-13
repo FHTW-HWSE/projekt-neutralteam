@@ -93,7 +93,7 @@ int isValidStudentId(char *studentId) {
 }
 
 
-int isValidRoomFileName(char * fileName) {
+int isValidRoomFileName(const char *fileName) {
     char c;
     if (strcmp(fileName, ".") == 0 || strcmp(fileName, "..") == 0) {
         return 0;

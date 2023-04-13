@@ -4,6 +4,6 @@
 #include "enterStudents.hpp"
 
 TEST_CASE("filename_onlyLetters_noExtension") {
-    char fileName[] = "filename";
+    char const *fileName = GENERATE("fileName", "Room", "SitzPlan");
     REQUIRE(1 == isValidRoomFileName(fileName));
 }

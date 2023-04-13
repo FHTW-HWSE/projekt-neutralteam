@@ -3,5 +3,5 @@
 #include "room.hpp"
 void enterStudents(Room *room);
 int isValidStudentId(char *studentId);
-int isValidRoomFileName(char *fileName);
+int isValidRoomFileName(const char *fileName);
 #endif
