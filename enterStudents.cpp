@@ -82,10 +82,10 @@ void enterStudents(Room *room) {
    }
 }
 
-int isValidStudentId(char *studentId) {
+int isValidStudentId(const char *studentId) {
     char c;
     while((c = *studentId++) != '\0') {
-        if (c == '\t' || c == '\n' || c == '\r' || c == ',' || c == ':')
+        if (c == '\t' || c == '\n'|| c == ',' || c == ':')
             return 0;
 
     }
