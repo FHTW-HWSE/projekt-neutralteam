@@ -94,13 +94,16 @@ int isValidStudentId(char *studentId) {
 
 
 int isValidRoomFileName(const char *fileName) {
+    int i = 0;
     char c;
-    if (strcmp(fileName, ".") == 0 || strcmp(fileName, "..") == 0) {
+    if(fileName == NULL) {
         return 0;
     }
-    while((c = *fileName++) != '\0') {
-        if (! (c == '.' || isalnum(c)) ) 
-            return 0;
+    if(fileName[0] == '\0') {
+        return 0;
+    }
+    if (fileName[0] == '/' || fileName[0] == '\\' || fileName[0] == '.' && (fileName[1] == '\0' || ((fileName[1] == '.' || fileName[1] == '/' || fileName[1] == '\\') && fileName[2] == '\0'))) {
+        return 0;
     }
     return 1;
 }
