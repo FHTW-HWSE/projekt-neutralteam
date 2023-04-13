@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/TEST.dir/tests.cpp.o CMakeFiles/TEST.dir/directNeighbors.cpp.o CMakeFiles/TEST.dir/enterStudents.cpp.o CMakeFiles/TEST.dir/indirectNeighbors.cpp.o CMakeFiles/TEST.dir/loadRoom.cpp.o CMakeFiles/TEST.dir/menu.cpp.o CMakeFiles/TEST.dir/newRoom.cpp.o CMakeFiles/TEST.dir/queryStudents.cpp.o CMakeFiles/TEST.dir/room.cpp.o -o TEST 
