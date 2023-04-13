@@ -1,2 +1,0 @@
-#!/bin/bash
-gcc -Wall -Wextra -pedantic main.cpp menu.cpp room.cpp newRoom.cpp loadRoom.cpp enterStudents.cpp queryStudents.cpp directNeighbors.cpp indirectNeighbors.cpp tests.cpp -lcatch2 -o project.exe -g
