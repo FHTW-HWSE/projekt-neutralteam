@@ -96,13 +96,19 @@ int isValidStudentId(char *studentId) {
 int isValidRoomFileName(const char *fileName) {
     int i = 0;
     char c;
-    if(fileName == NULL) {
+    if (fileName == NULL) {
         return 0;
     }
-    if(fileName[0] == '\0') {
+    if (fileName[0] == '\0') {
         return 0;
     }
-    if (fileName[0] == '/' || fileName[0] == '\\' || fileName[0] == '.' && (fileName[1] == '\0' || ((fileName[1] == '.' || fileName[1] == '/' || fileName[1] == '\\') && fileName[2] == '\0'))) {
+    if (fileName[0] == '/' || fileName[0] == '\\') {
+        return 0;
+    }
+    if (fileName[0] == '.' && (fileName[1] == '\0' || fileName[1] == '/' || fileName[1] == '\\') ) {
+        return 0;
+    }
+    if (fileName[0] == '.' && fileName[1] == '.' && (fileName[2] == '\0' || fileName[2] == '/' || fileName[2] == '\\') ) {
         return 0;
     }
     return 1;
