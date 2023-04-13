@@ -3,17 +3,12 @@
 #include <catch2/catch.hpp>
 #include "enterStudents.hpp"
 
-TEST_CASE("IsValidRoomFileName_noExtension") {
-    char const *fileName = GENERATE("fileName", "Room1", "SitzPlan", "SitzPlan123");
-    REQUIRE(1 == isValidRoomFileName(fileName));
-}
-
-TEST_CASE("IsValidRoomFileName_withExtension") {
-    char const *fileName = GENERATE("fileName.txt", "Room2.txt", "SitzPlan.txt", "Sitz.Plan.txt");
+TEST_CASE("IsValidRoomFileName_allowedName") {
+    char const *fileName = GENERATE("room", "roomName", "test123", "1room", "...", ".../", "...\\", "room/room", "room\\room", "room.txt", "sitz.plan", "sitz.plan.wtf, sitz.plan.1");
     REQUIRE(1 == isValidRoomFileName(fileName));
 }
 
 TEST_CASE("IsValidRoomFileName_forbiddenName") {
-    char const *fileName = GENERATE(".", "..", "./", ".\\", "/qwertz", "\\qwertz" );
+    char const *fileName = GENERATE(".", "..", "../", "..\\", "./", ".\\", "/qwertz", "\\qwertz" );
     REQUIRE(0 == isValidRoomFileName(fileName));
 }

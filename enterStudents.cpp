@@ -92,7 +92,6 @@ int isValidStudentId(char *studentId) {
     return 1;
 }
 
-
 int isValidRoomFileName(const char *fileName) {
     int i = 0;
     char c;
