@@ -101,7 +101,7 @@ char *getFileContent(char *fileName) {
     int fileLength = ftell(file);
     rewind(file);
     char *fileContent = (char*)malloc(sizeof(char) * fileLength+1);
-    fgets(fileContent, fileLength+1, file);
+    fread(fileContent,1, fileLength+1, file);
     fclose(file);
     return fileContent;
 }
