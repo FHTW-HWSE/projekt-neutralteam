@@ -37,12 +37,7 @@ void loadRoom(Room *room) {
     }
 }
 
-Room *loadRoomFromFile(char *fileName) {
-    char *fileContent = getFileContent(fileName);
-    if (fileContent == NULL) {
-        printf("file not found\n");
-        return NULL;
-    }
+Room *getRoomFromFileContent(char *fileContent) {
     char **fileContentSubstrings = (char**)malloc(sizeof(char*) * strlen(fileContent));
     int substringCount = 0;
     char *substring = strtok(fileContent, ",");
@@ -88,6 +83,16 @@ Room *loadRoomFromFile(char *fileName) {
         strcpy(room->seats[seat], studentId);
     }
     free(fileContentSubstrings);
+    return room;
+}
+
+Room *loadRoomFromFile(char *fileName) {
+    char *fileContent = getFileContent(fileName);
+    if (fileContent == NULL) {
+        printf("file not found\n");
+        return NULL;
+    }
+    Room *room = getRoomFromFileContent(fileContent);
     free(fileContent);
     return room;
 }
