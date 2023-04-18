@@ -9,7 +9,7 @@
 
 void newRoom() {
     printf("\nnew room\n");
-    char str[SMALL_MAGIC_NUMBER] = "0";
+    char str[MAX_UIMENU_SELECTION_LENGTH] = "0";
     int rows = 0;
     int cols = 0;
     int layout = 0;
@@ -20,7 +20,7 @@ void newRoom() {
         if (strcmp(str, END_PROGRAM_KEYWORD) == 0) {
             exit(0);
         }
-    } while(rows < 1);
+    } while(rows < 1 || rows > MAX_ROWS);
     do {
         printf("enter number of columns: ");
         scanf("%s", str);
@@ -28,7 +28,7 @@ void newRoom() {
         if (strcmp(str, END_PROGRAM_KEYWORD) == 0) {
             exit(0);
         }
-    } while(cols < 1);
+    } while(cols < 1 || cols > MAX_COLS);
     printf("\nroom layout\n");
     printf("  100%%\t[1]\n");
     printf("  50%%\t[2]\n");
@@ -53,7 +53,7 @@ Room *genRoom(int rows, int cols, int layout) {
     room->layout = layout;
     room->seats = (char**)malloc(sizeof(char*) * rows * cols);
     for (int i = 0; i < rows*cols; i++) {
-        room->seats[i] = (char*)malloc(sizeof(char) * SMALL_MAGIC_NUMBER);
+        room->seats[i] = (char*)malloc(sizeof(char) * (MAX_STUDENTID_LENGTH+1));
         strcpy(room->seats[i], "");
     }
     return room;

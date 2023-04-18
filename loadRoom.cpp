@@ -16,7 +16,7 @@ void loadRoom(Room *room) {
     printf("\nwhat do you want to do?\n");
     printf("  query students  [1]\n");
     printf("  enter students  [2]\n");
-    char str[SMALL_MAGIC_NUMBER] = "0";
+    char str[MAX_UIMENU_SELECTION_LENGTH] = "0";
     int option = 0;
     do {
         printf("select option: ");
@@ -43,7 +43,7 @@ Room *loadRoomFromFile(char *fileName) {
         printf("file not found\n");
         return NULL;
     }
-    char **fileContentSubstrings = (char**)malloc(sizeof(char*) * BIG_MAGIC_NUMBER);
+    char **fileContentSubstrings = (char**)malloc(sizeof(char*) * strlen(fileContent));
     int substringCount = 0;
     char *substring = strtok(fileContent, ",");
     while (substring != NULL) {
@@ -66,21 +66,26 @@ Room *loadRoomFromFile(char *fileName) {
     Room *room = genRoom(rows, cols, layout);
     for (int i = 3; i < substringCount; i++) {
         char *seatString = fileContentSubstrings[i];
-        char *name = strchr(seatString, ':');
-        if (name == NULL) {
-            printf("invalid file format\n");
+        char *split = strchr(seatString, ':');
+        if (split == NULL) {
+            printf("invalid file format1\n");
             free(fileContentSubstrings);
             return NULL;
         }
-        *name = '\0';
-        name++;
+        *split = '\0';
         int seat = atoi(seatString);
         if (!isValidSeat(room, seat)) {
-            printf("invalid file format\n");
+            printf("invalid file format2\n");
             free(fileContentSubstrings);
             return NULL;
         }
-        strcpy(room->seats[seat], name);
+        char *studentId = split+1;
+        if (strlen(studentId) > MAX_STUDENTID_LENGTH) {
+            printf("invalid file format3\n");
+            free(fileContentSubstrings);
+            return NULL;
+        }
+        strcpy(room->seats[seat], studentId);
     }
     free(fileContentSubstrings);
     free(fileContent);
@@ -92,8 +97,11 @@ char *getFileContent(char *fileName) {
     if (file == NULL) {
         return NULL;
     }
-    char *fileContent = (char*)malloc(sizeof(char) * BIG_MAGIC_NUMBER);
-    fgets(fileContent, BIG_MAGIC_NUMBER, file);
+    fseek(file, 0, SEEK_END);
+    int fileLength = ftell(file);
+    rewind(file);
+    char *fileContent = (char*)malloc(sizeof(char) * fileLength+1);
+    fgets(fileContent, fileLength+1, file);
     fclose(file);
     return fileContent;
 }

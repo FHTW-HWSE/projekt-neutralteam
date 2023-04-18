@@ -1,7 +1,9 @@
 #include <stdio.h>
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
+
 #include "enterStudents.hpp"
+#include "newRoom.hpp"
 
 TEST_CASE("IsValidRoomFileName_allowedName") {
     char const *fileName = GENERATE("room", "roomName", "test123", "1room", "...", ".../", "...\\", "room/room", "room\\room", "room.txt", "sitz.plan", "sitz.plan.wtf, sitz.plan.1");
@@ -19,6 +21,6 @@ TEST_CASE("IsValidStudentId_allowedId") {
 }
 
 TEST_CASE("isValidStudentId_forbiddenId") {
-    char const *studentId = GENERATE("student\n", "student\t", ",,student1, student2", "student:1");
+    char const *studentId = GENERATE("student\n", "student\t", "student1, student2", "student:1");
     REQUIRE(0 == isValidStudentId(studentId));
 }

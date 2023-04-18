@@ -7,9 +7,10 @@
 #include "room.hpp"
 #include "newRoom.hpp"
 #include "loadRoom.hpp"
+#include "enterStudents.hpp"
 
 void menu() {
-    char str[SMALL_MAGIC_NUMBER] = "0";
+    char str[MAX_UIMENU_SELECTION_LENGTH] = "0";
     int option = 0;
     do {
         printf("\nmenu\n");
@@ -27,15 +28,15 @@ void menu() {
         newRoom();
         break;
     case 2: {
-            char filename[SMALL_MAGIC_NUMBER];
+            char fileName[MAX_FILENAME_LENGTH+1];
             Room *room = NULL;
             do {
                 printf("enter filename: ");
-                scanf("%s", filename);
-                if (strcmp(filename, END_PROGRAM_KEYWORD) == 0) {
+                scanf("%s", fileName);
+                if (strcmp(fileName, END_PROGRAM_KEYWORD) == 0) {
                     exit(0);
                 }
-            } while((room = loadRoomFromFile(filename)) == NULL);
+            } while(!isValidRoomFileName(fileName) || (room = loadRoomFromFile(fileName)) == NULL);
             loadRoom(room); 
         }
         break;

@@ -20,7 +20,7 @@ void enterStudents(Room *room) {
     while(1) {
         printf("\n");
         int seat = 0;
-        char seatString[SMALL_MAGIC_NUMBER] = "";
+        char seatString[MAX_UIMENU_SELECTION_LENGTH] = "";
         do {
             printf("enter seat: ");
             scanf("%s", seatString);
@@ -29,7 +29,7 @@ void enterStudents(Room *room) {
                 exit(0);
             }
             if (strcmp(seatString, "-save") == 0) {
-                char filename[SMALL_MAGIC_NUMBER];
+                char filename[MAX_FILENAME_LENGTH+1];
                 do {
                     printf("enter filename: ");
                     scanf("%s", filename);
@@ -44,7 +44,7 @@ void enterStudents(Room *room) {
             }
             seat = atoi(seatString);
         } while (!isValidSeat(room, seat));
-        char studentId[SMALL_MAGIC_NUMBER] = "";
+        char studentId[MAX_STUDENTID_LENGTH+1];
         while(1) {
             printf("enter student id: ");
             scanf("%s", studentId);
@@ -53,7 +53,7 @@ void enterStudents(Room *room) {
                 exit(0);
             }
             if (strcmp(studentId, "-save") == 0) {
-                char filename[SMALL_MAGIC_NUMBER];
+                char filename[MAX_FILENAME_LENGTH+1];
                 do {
                     printf("enter filename: ");
                     scanf("%s", filename);
@@ -83,11 +83,15 @@ void enterStudents(Room *room) {
 }
 
 int isValidStudentId(const char *studentId) {
+    char *p = (char*)studentId;
     char c;
-    while((c = *studentId++) != '\0') {
+    while((c = *p++) != '\0') {
         if (c == '\t' || c == '\n'|| c == ',' || c == ':')
             return 0;
 
+    }
+    if (strlen(studentId) == 0 || strlen(studentId) > MAX_STUDENTID_LENGTH) { 
+        return 0;
     }
     return 1;
 }
@@ -99,6 +103,9 @@ int isValidRoomFileName(const char *fileName) {
         return 0;
     }
     if (fileName[0] == '\0') {
+        return 0;
+    }
+    if (strlen(fileName) > MAX_FILENAME_LENGTH) {
         return 0;
     }
     if (fileName[0] == '/' || fileName[0] == '\\') {

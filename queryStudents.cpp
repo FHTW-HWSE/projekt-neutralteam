@@ -13,7 +13,7 @@ void queryStudents(Room *room) {
     printf("\nquery students\n");
     printSeatsInUse(room);
     while(1) {
-        char studentId[SMALL_MAGIC_NUMBER];
+        char studentId[MAX_STUDENTID_LENGTH+1];
         do {
             printf("\nenter student id: ");
             scanf("%s", studentId);
