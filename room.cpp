@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 #include "room.hpp"
+#include "seat.hpp"
 #include "main.hpp"
 
 void saveRoomToFile(Room *room, char *fileName) {
@@ -11,15 +12,6 @@ void saveRoomToFile(Room *room, char *fileName) {
     fprintf(file, "%s", roomString);
     free(roomString);
     fclose(file);
-}
-
-void printSeatsInUse(Room *room) {
-    SeatsInUse *seatsInUse = getSeatsInUse(room);
-    for (int i = 0; i < seatsInUse->size; i++) {
-        printf("%d: %s\n", seatsInUse->seats[i].row*room->cols+seatsInUse->seats[i].col, seatsInUse->seats[i].studentId);
-    }
-    free(seatsInUse->seats);
-    free(seatsInUse);
 }
 
 void printRoomLayout(Room *room) {
@@ -70,42 +62,4 @@ char *getRoomLayoutString(Room *room) {
     }
     roomLayoutString[currentIndex] = '\0';
     return roomLayoutString;
-}
-
-int isValidSeat(Room *room, int seat) {
-    int row = seat / room->cols;
-    int col = seat % room->cols;
-    if (row < 0 || row >= room->rows) {
-        return 0;
-    }
-    if (col < 0 || col >= room->cols) {
-        return 0;
-    }
-    switch(room->layout) {
-    case 1:
-        return 1;
-    case 2:
-        return (row % 2 == 0 && col % 2 == 0) || (row % 2 == 1 && col % 2 == 1);
-    case 3:
-        return row % 2 == 0 && col % 2 == 0;
-    default:
-        return 0;
-    }
-}
-
-SeatsInUse *getSeatsInUse(Room *room) {
-    SeatsInUse *seatsInUse = (SeatsInUse*)malloc(sizeof(SeatsInUse));
-    seatsInUse->size = 0;
-    seatsInUse->seats = (Seat*)malloc(sizeof(Seat) * room->rows*room->cols);
-    for (int i = 0; i < room->rows*room->cols; i++) {
-        if (isValidSeat(room, i)) {
-            if (strlen(room->seats[i]) > 0) {
-                seatsInUse->seats[seatsInUse->size].row = i / room->cols;
-                seatsInUse->seats[seatsInUse->size].col = i % room->cols;
-                seatsInUse->seats[seatsInUse->size].studentId = room->seats[i];
-                seatsInUse->size++;
-            }
-        }
-    }
-    return seatsInUse;
 }

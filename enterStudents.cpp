@@ -4,21 +4,20 @@
 #include <ctype.h>
 
 #include "enterStudents.hpp"
-#include "loadRoom.hpp"
 #include "room.hpp"
+#include "seat.hpp"
+#include "loadRoom.hpp"
 #include "main.hpp"
 
 void enterStudents(Room *room) {
     printf("\nentering students\n");
-    printf("valid seats: ");
-    for (int i = 0; i < room->rows*room->cols; i++) {
-        if (isValidSeat(room, i)) {
-            printf("%d ", i);
-        }
-    }
     printf("\nconfirm with -save\n");
     while(1) {
-        printf("\n");
+        printf("\nvalid seats:\n");
+        Seats *allSeats = getAllSeats(room);
+        printSeats(room, allSeats);
+        free(allSeats->seats);
+        free(allSeats);
         int seat = 0;
         char seatString[MAX_UIMENU_SELECTION_LENGTH] = "";
         do {

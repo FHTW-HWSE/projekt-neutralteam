@@ -10,6 +10,7 @@ add_executable(PROGRAMM
     newRoom.cpp
     queryStudents.cpp
     room.cpp
+    seat.cpp
 )
 add_executable(TEST
     tests.cpp   
@@ -21,6 +22,7 @@ add_executable(TEST
     newRoom.cpp
     queryStudents.cpp
     room.cpp
+    seat.cpp
 )
 add_library(Catch2 INTERFACE)
 

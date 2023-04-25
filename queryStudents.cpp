@@ -2,16 +2,19 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "room.hpp"
 #include "main.hpp"
 #include "queryStudents.hpp"
 #include "enterStudents.hpp"
 #include "directNeighbors.hpp"
 #include "indirectNeighbors.hpp"
+#include "seat.hpp"
 
 void queryStudents(Room *room) {
     printf("\nquery students\n");
-    printSeatsInUse(room);
+    Seats *seatsInUse = getSeatsInUse(room);
+    printSeats(room, seatsInUse);
+    free (seatsInUse->seats);
+    free (seatsInUse);
     while(1) {
         char studentId[MAX_STUDENTID_LENGTH+1];
         do {
@@ -27,47 +30,19 @@ void queryStudents(Room *room) {
             printf("student not found\n");
         } else {
             printf("student found at seat %d\n", seat);
-            printNeighbors(room, seat);
+            Seats *directNeighbors = getDirectNeighborSeats(room, seat);
+            Seats *indirectNeighbors = getIndirectNeighborSeats(room, seat);
+            printf("direct neighbors:\n");
+            printSeats(room, directNeighbors);
+            printf("indirect neighbors:\n");
+            printSeats(room, indirectNeighbors);
+            free(directNeighbors->seats);
+            free(directNeighbors);
+            free(indirectNeighbors->seats);
+            free(indirectNeighbors);
         }
     }
     freeRoom(room);
-}
-
-void printNeighbors(Room *room, int seat) {
-    printf("\ndirect neighbors: \n");
-    printSeat(room, getTopLeftSeat(room, seat));
-    printSeat(room, getTopSeat(room, seat));
-    printSeat(room, getTopRightSeat(room, seat));
-    printSeat(room, getRightSeat(room, seat));
-    printSeat(room, getBottomRightSeat(room, seat));
-    printSeat(room, getBottomSeat(room, seat));
-    printSeat(room, getBottomLeftSeat(room, seat));
-    printSeat(room, getLeftSeat(room, seat));
-    printf("\nindirect neighbors: \n");
-    printSeat(room, getTopTopLeftLeftSeat(room, seat));
-    printSeat(room, getTopTopLeftSeat(room, seat));
-    printSeat(room, getTopTopSeat(room, seat));
-    printSeat(room, getTopTopRightSeat(room, seat));
-    printSeat(room, getTopTopRightRightSeat(room, seat));
-    printSeat(room, getTopLeftLeftSeat(room, seat));
-    printSeat(room, getTopRightRightSeat(room, seat));
-    printSeat(room, getBottomBottomLeftLeftSeat(room, seat));
-    printSeat(room, getBottomBottomLeftSeat(room, seat));
-    printSeat(room, getBottomBottomSeat(room, seat));
-    printSeat(room, getBottomBottomRightSeat(room, seat));
-    printSeat(room, getBottomBottomRightRightSeat(room, seat));
-    printSeat(room, getBottomLeftLeftSeat(room, seat));
-    printSeat(room, getBottomRightRightSeat(room, seat));
-    printSeat(room, getLeftLeftSeat(room, seat));
-    printSeat(room, getRightRightSeat(room, seat));
-}
-
-void printSeat(Room *room, int seat) {
-    if (isValidSeat(room, seat)) {
-        if (strlen(room->seats[seat]) > 0) {
-            printf("%d: %s\n", seat, room->seats[seat]);
-        }
-    }
 }
   
 int getSeatByStudentId(Room *room, char *studentId) {
