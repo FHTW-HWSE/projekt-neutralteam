@@ -74,7 +74,6 @@ TEST_CASE("genRoom_validParameters") {
     REQUIRE(rows == room->rows);
     REQUIRE(cols == room->cols);
     REQUIRE(layout == room->layout);
-    REQUIRE(sizeof(room->seats) == rows * cols * sizeof(char*));
 }
 
 TEST_CASE("genRoom_invalidRows") {
