@@ -64,3 +64,38 @@ TEST_CASE("isValidColNumber_forbiddenColNumber") {
     int cols = GENERATE(0, 101);
     REQUIRE(0 == isValidColNumber(cols));
 }
+
+TEST_CASE("genRoom_validParameters") {
+    int rows = GENERATE(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    int cols = GENERATE(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    int layout = GENERATE(1, 2, 3);
+    Room *room = genRoom(rows, cols, layout);
+    REQUIRE(rows == room->rows);
+    REQUIRE(cols == room->cols);
+    REQUIRE(layout == room->layout);
+    REQUIRE(sizeof(room->seats) == rows * cols * sizeof(char*));
+}
+
+TEST_CASE("genRoom_invalidRows") {
+    int rows = GENERATE(0, 101);
+    int cols = GENERATE(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    int layout = GENERATE(1, 2, 3);
+    Room *room = genRoom(rows, cols, layout);
+    REQUIRE(NULL == room);
+}
+
+TEST_CASE("genRoom_invalidCols") {
+    int rows = GENERATE(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    int cols = GENERATE(0, 101);
+    int layout = GENERATE(1, 2, 3);
+    Room *room = genRoom(rows, cols, layout);
+    REQUIRE(NULL == room);
+}
+
+TEST_CASE("genRoom_invalidLayout") {
+    int rows = GENERATE(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    int cols = GENERATE(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    int layout = GENERATE(0, 4);
+    Room *room = genRoom(rows, cols, layout);
+    REQUIRE(NULL == room);
+}

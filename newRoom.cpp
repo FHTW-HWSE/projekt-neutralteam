@@ -59,6 +59,9 @@ int isValidLayout(int layout) {
 }
 
 Room *genRoom(int rows, int cols, int layout) {
+    if (!isValidRowNumber(rows) || !isValidColNumber(cols) || !isValidLayout(layout)) {
+        return NULL;
+    }
     Room *room = (Room*)malloc(sizeof(Room));
     room->rows = rows;
     room->cols = cols;
