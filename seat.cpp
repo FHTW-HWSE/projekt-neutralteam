@@ -97,12 +97,10 @@ Seats *getDirectNeighborSeats(Room *room, int seat) {
     if (topLeftSeat != -1) {
         addSeat(directNeighborSeats, topLeftSeat / room->cols, topLeftSeat % room->cols, room->seats[topLeftSeat]);
     }
-   
-    
 }
 
 Seats *getIndirectNeighborSeats(Room *room, int seat) {
-     Seats *directNeighborSeats = (Seats*)malloc(sizeof(Seats));
+    Seats *directNeighborSeats = (Seats*)malloc(sizeof(Seats));
     directNeighborSeats->size = 0;
     directNeighborSeats->seats = (Seat*)malloc(sizeof(Seat) * 16);
 

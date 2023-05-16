@@ -24,3 +24,43 @@ TEST_CASE("isValidStudentId_forbiddenId") {
     char const *studentId = GENERATE("student\n", "student\t", "student1, student2", "student:1");
     REQUIRE(0 == isValidStudentId(studentId));
 }
+
+TEST_CASE("isValidOption_allowedOption") {
+    int option = GENERATE(1, 2);
+    REQUIRE(1 == isValidOption(option));
+}
+
+TEST_CASE("isValidOption_forbiddenOption") {
+    int option = GENERATE(0, 3);
+    REQUIRE(0 == isValidOption(option));
+}
+
+TEST_CASE("isValidLayout_allowedLayout") {
+    int layout = GENERATE(1, 2, 3);
+    REQUIRE(1 == isValidLayout(layout));
+}
+
+TEST_CASE("isValidLayout_forbiddenLayout") {
+    int layout = GENERATE(0, 4);
+    REQUIRE(0 == isValidLayout(layout));
+}
+
+TEST_CASE("isValidRowNumber_allowedRowNumber") {
+    int rows = GENERATE(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    REQUIRE(1 == isValidRowNumber(rows));
+}
+
+TEST_CASE("isValidRowNumber_forbiddenRowNumber") {
+    int rows = GENERATE(0, 101);
+    REQUIRE(0 == isValidRowNumber(rows));
+}
+
+TEST_CASE("isValidColNumber_allowedColNumber") {
+    int cols = GENERATE(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    REQUIRE(1 == isValidColNumber(cols));
+}
+
+TEST_CASE("isValidColNumber_forbiddenColNumber") {
+    int cols = GENERATE(0, 101);
+    REQUIRE(0 == isValidColNumber(cols));
+}

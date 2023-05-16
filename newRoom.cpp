@@ -20,7 +20,7 @@ void newRoom() {
         if (strcmp(str, END_PROGRAM_KEYWORD) == 0) {
             exit(0);
         }
-    } while(rows < 1 || rows > MAX_ROWS);
+    } while(!isValidRowNumber(rows));
     do {
         printf("enter number of columns: ");
         scanf("%s", str);
@@ -28,7 +28,7 @@ void newRoom() {
         if (strcmp(str, END_PROGRAM_KEYWORD) == 0) {
             exit(0);
         }
-    } while(cols < 1 || cols > MAX_COLS);
+    } while(!isValidColNumber(cols));
     printf("\nroom layout\n");
     printf("  100%%\t[1]\n");
     printf("  50%%\t[2]\n");
@@ -40,10 +40,22 @@ void newRoom() {
         if (strcmp(str, END_PROGRAM_KEYWORD) == 0) {
             exit(0);
         }
-    } while(layout < 1 || layout > 3);
+    } while(!isValidLayout(layout));
     Room *room = genRoom(rows, cols, layout);
     printf("\nroom created\n");
     enterStudents(room);
+}
+
+int isValidRowNumber(int rows) {
+    return rows >= 1 && rows <= MAX_ROWS;
+}
+
+int isValidColNumber(int cols) {
+    return cols >= 1 && cols <= MAX_COLS;
+}
+
+int isValidLayout(int layout) {
+    return layout >= 1 && layout <= 3;
 }
 
 Room *genRoom(int rows, int cols, int layout) {
