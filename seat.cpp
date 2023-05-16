@@ -97,61 +97,63 @@ Seats *getDirectNeighborSeats(Room *room, int seat) {
     if (topLeftSeat != -1) {
         addSeat(directNeighborSeats, topLeftSeat / room->cols, topLeftSeat % room->cols, room->seats[topLeftSeat]);
     }
+    return directNeighborSeats;
 }
 
 Seats *getIndirectNeighborSeats(Room *room, int seat) {
-    Seats *directNeighborSeats = (Seats*)malloc(sizeof(Seats));
-    directNeighborSeats->size = 0;
-    directNeighborSeats->seats = (Seat*)malloc(sizeof(Seat) * 16);
+    Seats *indirectNeighborSeats = (Seats*)malloc(sizeof(Seats));
+    indirectNeighborSeats->size = 0;
+    indirectNeighborSeats->seats = (Seat*)malloc(sizeof(Seat) * 16);
 
     int topTopSeat = getTopTopSeat(room, seat);
     if (topTopSeat != -1) {
-        addSeat(directNeighborSeats, topTopSeat / room->cols, topTopSeat % room->cols, room->seats[topTopSeat]);
+        addSeat(indirectNeighborSeats, topTopSeat / room->cols, topTopSeat % room->cols, room->seats[topTopSeat]);
     }
     int topTopRightSeat = getTopTopRightSeat(room, seat);
     if (topTopRightSeat != -1) {
-        addSeat(directNeighborSeats, topTopRightSeat / room->cols, topTopRightSeat % room->cols, room->seats[topTopRightSeat]);
+        addSeat(indirectNeighborSeats, topTopRightSeat / room->cols, topTopRightSeat % room->cols, room->seats[topTopRightSeat]);
     }
     int topRightRightSeat = getTopRightRightSeat(room, seat);
     if (topRightRightSeat != -1) {
-        addSeat(directNeighborSeats, topRightRightSeat / room->cols, topRightRightSeat % room->cols, room->seats[topRightRightSeat]);
+        addSeat(indirectNeighborSeats, topRightRightSeat / room->cols, topRightRightSeat % room->cols, room->seats[topRightRightSeat]);
     }
     int rightRightSeat = getRightRightSeat(room, seat);
     if (rightRightSeat != -1) {
-        addSeat(directNeighborSeats, rightRightSeat / room->cols, rightRightSeat % room->cols, room->seats[rightRightSeat]);
+        addSeat(indirectNeighborSeats, rightRightSeat / room->cols, rightRightSeat % room->cols, room->seats[rightRightSeat]);
     }
     int bottomRightRightSeat = getBottomRightRightSeat(room, seat);
     if (bottomRightRightSeat != -1) {
-        addSeat(directNeighborSeats, bottomRightRightSeat / room->cols, bottomRightRightSeat % room->cols, room->seats[bottomRightRightSeat]);
+        addSeat(indirectNeighborSeats, bottomRightRightSeat / room->cols, bottomRightRightSeat % room->cols, room->seats[bottomRightRightSeat]);
     }
     int bottomBottomRightSeat = getBottomBottomRightSeat(room, seat);
     if (bottomBottomRightSeat != -1) {
-        addSeat(directNeighborSeats, bottomBottomRightSeat / room->cols, bottomBottomRightSeat % room->cols, room->seats[bottomBottomRightSeat]);
+        addSeat(indirectNeighborSeats, bottomBottomRightSeat / room->cols, bottomBottomRightSeat % room->cols, room->seats[bottomBottomRightSeat]);
     }
     int bottomBottomSeat = getBottomBottomSeat(room, seat);
     if (bottomBottomSeat != -1) {
-        addSeat(directNeighborSeats, bottomBottomSeat / room->cols, bottomBottomSeat % room->cols, room->seats[bottomBottomSeat]);
+        addSeat(indirectNeighborSeats, bottomBottomSeat / room->cols, bottomBottomSeat % room->cols, room->seats[bottomBottomSeat]);
     }
     int bottomBottomLeftSeat = getBottomBottomLeftSeat(room, seat);
     if (bottomBottomLeftSeat != -1) {
-        addSeat(directNeighborSeats, bottomBottomLeftSeat / room->cols, bottomBottomLeftSeat % room->cols, room->seats[bottomBottomLeftSeat]);
+        addSeat(indirectNeighborSeats, bottomBottomLeftSeat / room->cols, bottomBottomLeftSeat % room->cols, room->seats[bottomBottomLeftSeat]);
     }
     int bottomLeftLeftSeat = getBottomLeftLeftSeat(room, seat);
     if (bottomLeftLeftSeat != -1) {
-        addSeat(directNeighborSeats, bottomLeftLeftSeat / room->cols, bottomLeftLeftSeat % room->cols, room->seats[bottomLeftLeftSeat]);
+        addSeat(indirectNeighborSeats, bottomLeftLeftSeat / room->cols, bottomLeftLeftSeat % room->cols, room->seats[bottomLeftLeftSeat]);
     }
     int leftLeftSeat = getLeftLeftSeat(room, seat);
     if (leftLeftSeat != -1) {
-        addSeat(directNeighborSeats, leftLeftSeat / room->cols, leftLeftSeat % room->cols, room->seats[leftLeftSeat]);
+        addSeat(indirectNeighborSeats, leftLeftSeat / room->cols, leftLeftSeat % room->cols, room->seats[leftLeftSeat]);
     }
     int topLeftLeftSeat = getTopLeftLeftSeat(room, seat);
     if (topLeftLeftSeat != -1) {
-        addSeat(directNeighborSeats, topLeftLeftSeat / room->cols, topLeftLeftSeat % room->cols, room->seats[topLeftLeftSeat]);
+        addSeat(indirectNeighborSeats, topLeftLeftSeat / room->cols, topLeftLeftSeat % room->cols, room->seats[topLeftLeftSeat]);
     }
     int topTopLeftSeat = getTopTopLeftSeat(room, seat);
     if (topTopLeftSeat != -1) {
-        addSeat(directNeighborSeats, topTopLeftSeat / room->cols, topTopLeftSeat % room->cols, room->seats[topTopLeftSeat]);
+        addSeat(indirectNeighborSeats, topTopLeftSeat / room->cols, topTopLeftSeat % room->cols, room->seats[topTopLeftSeat]);
     }
+    return indirectNeighborSeats;
 }
 
 void addSeat(Seats *seats, int row, int col, char *studentId) {
