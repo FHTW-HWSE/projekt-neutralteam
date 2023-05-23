@@ -47,7 +47,7 @@ Room *getRoomFromFileContent(char *fileContent) {
         substring = strtok(NULL, ",");
     }
     if (substringCount < 3) {
-        printf("invalid file format\n");
+        printf("invalid file format1\n");
         free(fileContentSubstrings);
         return NULL;
     }
@@ -55,7 +55,7 @@ Room *getRoomFromFileContent(char *fileContent) {
     int cols = atoi(fileContentSubstrings[1]);
     int layout = atoi(fileContentSubstrings[2]);
     if (rows < 1 || cols < 1 || layout < 1 || layout > 3) {
-        printf("invalid file format\n");
+        printf("invalid file format2\n");
         free(fileContentSubstrings);
         return NULL;
     }
@@ -64,20 +64,20 @@ Room *getRoomFromFileContent(char *fileContent) {
         char *seatString = fileContentSubstrings[i];
         char *split = strchr(seatString, ':');
         if (split == NULL) {
-            printf("invalid file format1\n");
+            printf("invalid file format3\n");
             free(fileContentSubstrings);
             return NULL;
         }
         *split = '\0';
         int seatNumber = atoi(seatString);
         if (!isValidSeatNumber(room, seatNumber)) {
-            printf("invalid file format2\n");
+            printf("invalid file format4\n");
             free(fileContentSubstrings);
             return NULL;
         }
         char *studentId = split+1;
         if (strlen(studentId) > MAX_STUDENTID_LENGTH) {
-            printf("invalid file format3\n");
+            printf("invalid file format5\n");
             free(fileContentSubstrings);
             return NULL;
         }
