@@ -7,7 +7,13 @@
 #include "seat.hpp"
 #include "room.hpp"
 
-int isValidSeat(Room *room, int seatNumber) {
+void printSeats(Room *room, Seats *seats) {
+    for (int i = 0; i < seats->size; i++) {
+        printf("%d: %s\n", seats->seats[i].row*room->cols+seats->seats[i].col, seats->seats[i].studentId);
+    }
+}
+
+int isValidSeatNumber(Room *room, int seatNumber) {
     int row = seatNumber / room->cols;
     int col = seatNumber % room->cols;
     if (row < 0 || row >= room->rows) {
@@ -28,18 +34,12 @@ int isValidSeat(Room *room, int seatNumber) {
     }
 }
 
-void printSeats(Room *room, Seats *seats) {
-    for (int i = 0; i < seats->size; i++) {
-        printf("%d: %s\n", seats->seats[i].row*room->cols+seats->seats[i].col, seats->seats[i].studentId);
-    }
-}
-
 Seats *getSeatsInUse(Room *room) {
     Seats *seatsInUse = (Seats*)malloc(sizeof(Seats));
     seatsInUse->size = 0;
     seatsInUse->seats = (Seat*)malloc(sizeof(Seat) * room->rows*room->cols);
     for (int i = 0; i < room->rows*room->cols; i++) {
-        if (isValidSeat(room, i)) {
+        if (isValidSeatNumber(room, i)) {
             if (strlen(room->seats[i]) > 0) {
                 addSeat(seatsInUse, i / room->cols, i % room->cols, room->seats[i]);
             }
@@ -53,7 +53,7 @@ Seats *getAllSeats(Room *room) {
     allSeats->size = 0;
     allSeats->seats = (Seat*)malloc(sizeof(Seat) * room->rows*room->cols);
     for (int i = 0; i < room->rows*room->cols; i++) {
-        if (isValidSeat(room, i)) {
+        if (isValidSeatNumber(room, i)) {
             addSeat(allSeats, i / room->cols, i % room->cols, room->seats[i]);
         }
     }

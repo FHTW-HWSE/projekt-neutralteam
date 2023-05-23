@@ -43,7 +43,7 @@ void enterStudents(Room *room) {
                 return;
             }
             seatNumber = atoi(seatString);
-        } while (!isValidSeat(room, seatNumber));
+        } while (!isValidSeatNumber(room, seatNumber));
 
         char studentId[MAX_STUDENTID_LENGTH+1];
         do {
@@ -77,7 +77,7 @@ void enterStudents(Room *room) {
 }
 
 void writeStudentIdToSeatNumber(char studentId[MAX_STUDENTID_LENGTH+1], Room *room, int seatNumber) {
-    if (!isValidStudentId(studentId) || !isValidSeat(room, seatNumber)) {
+    if (!isValidStudentId(studentId) || !isValidSeatNumber(room, seatNumber)) {
         printf("invalid student id\n");
         return;
     }

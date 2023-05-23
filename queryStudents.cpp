@@ -47,7 +47,7 @@ void queryStudents(Room *room) {
   
 int getSeatByStudentId(Room *room, char *studentId) {
     for (int i = 0; i < room->rows*room->cols; i++) {
-        if (isValidSeat(room, i)) {
+        if (isValidSeatNumber(room, i)) {
             if (strcmp(room->seats[i], studentId) == 0) {
                 return i;
             }

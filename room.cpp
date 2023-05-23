@@ -52,7 +52,7 @@ char *getRoomLayoutString(Room *room) {
     int currentIndex = 0;
     for (int i = 0; i < room->rows; i++) {
         for (int j = 0; j < room->cols; j++) {
-            if (!isValidSeat(room, i*room->cols+j)) {
+            if (!isValidSeatNumber(room, i*room->cols+j)) {
                 roomLayoutString[currentIndex++] = ' ';
             } else {
                 roomLayoutString[currentIndex++] = 'X';

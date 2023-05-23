@@ -7,6 +7,7 @@
 #include "main.hpp"
 #include "menu.hpp"
 #include "newRoom.hpp"
+#include "seat.hpp"
 #include "enterStudents.hpp"
 #include "queryStudents.hpp"
 
@@ -69,7 +70,7 @@ Room *getRoomFromFileContent(char *fileContent) {
         }
         *split = '\0';
         int seat = atoi(seatString);
-        if (!isValidSeat(room, seat)) {
+        if (!isValidSeatNumber(room, seat)) {
             printf("invalid file format2\n");
             free(fileContentSubstrings);
             return NULL;

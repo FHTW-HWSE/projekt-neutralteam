@@ -16,4 +16,5 @@ Seats *getDirectNeighborSeats(Room *room, int seat);
 Seats *getIndirectNeighborSeats(Room *room, int seat);
 void printSeats(Room *room, Seats *seats);
 void addSeat(Seats *seats, int row, int col, char *studentId);
+int isValidSeatNumber(Room *room, int seatNumber);
 #endif
