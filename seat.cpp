@@ -7,9 +7,9 @@
 #include "seat.hpp"
 #include "room.hpp"
 
-int isValidSeat(Room *room, int seat) {
-    int row = seat / room->cols;
-    int col = seat % room->cols;
+int isValidSeat(Room *room, int seatNumber) {
+    int row = seatNumber / room->cols;
+    int col = seatNumber % room->cols;
     if (row < 0 || row >= room->rows) {
         return 0;
     }

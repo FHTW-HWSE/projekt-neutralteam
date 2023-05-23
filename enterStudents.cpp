@@ -18,7 +18,8 @@ void enterStudents(Room *room) {
         printSeats(room, allSeats);
         free(allSeats->seats);
         free(allSeats);
-        int seat = 0;
+
+        int seatNumber = 0;
         char seatString[MAX_UIMENU_SELECTION_LENGTH] = "";
         do {
             printf("enter seat: ");
@@ -41,10 +42,11 @@ void enterStudents(Room *room) {
                 loadRoom(room);
                 return;
             }
-            seat = atoi(seatString);
-        } while (!isValidSeat(room, seat));
+            seatNumber = atoi(seatString);
+        } while (!isValidSeat(room, seatNumber));
+
         char studentId[MAX_STUDENTID_LENGTH+1];
-        while(1) {
+        do {
             printf("enter student id: ");
             scanf("%s", studentId);
             if (strcmp(studentId, END_PROGRAM_KEYWORD) == 0) {
@@ -68,17 +70,23 @@ void enterStudents(Room *room) {
             if (strcmp(studentId, "-abort") == 0) {
                 break;
             }
-            if (isValidStudentId(studentId)) {
-                for (int i = 0; i < room->rows*room->cols; i++) {
-                    if (strcmp(room->seats[i], studentId) == 0) {
-                        room->seats[i][0] = '\0';
-                    }
-                }
-                strcpy(room->seats[seat], studentId);
-                break;
-            }
-        }
+        } while(!isValidStudentId(studentId));
+
+        writeStudentIdToSeatNumber(studentId, room, seatNumber);
    }
+}
+
+void writeStudentIdToSeatNumber(char studentId[MAX_STUDENTID_LENGTH+1], Room *room, int seatNumber) {
+    if (!isValidStudentId(studentId) || !isValidSeat(room, seatNumber)) {
+        printf("invalid student id\n");
+        return;
+    }
+    for (int i = 0; i < room->rows*room->cols; i++) {
+        if (strcmp(room->seats[i], studentId) == 0) {
+            room->seats[i][0] = '\0';
+        }
+    }
+    strcpy(room->seats[seatNumber], studentId);
 }
 
 int isValidStudentId(const char *studentId) {
