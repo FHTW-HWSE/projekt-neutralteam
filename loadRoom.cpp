@@ -59,7 +59,7 @@ Room *getRoomFromFileContent(char *fileContent) {
         free(fileContentSubstrings);
         return NULL;
     }
-    Room *room = genRoom(rows, cols, layout);
+    Room *room = generateNewRoom(rows, cols, layout);
     for (int i = 3; i < substringCount; i++) {
         char *seatString = fileContentSubstrings[i];
         char *split = strchr(seatString, ':');

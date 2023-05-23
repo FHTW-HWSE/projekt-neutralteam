@@ -7,7 +7,7 @@
 #include "newRoom.hpp"
 #include "enterStudents.hpp"
 
-void newRoom() {
+void createNewRoom() {
     printf("\nnew room\n");
     char str[MAX_UIMENU_SELECTION_LENGTH] = "0";
     int rows = 0;
@@ -41,7 +41,7 @@ void newRoom() {
             exit(0);
         }
     } while(!isValidLayout(layout));
-    Room *room = genRoom(rows, cols, layout);
+    Room *room = generateNewRoom(rows, cols, layout);
     printf("\nroom created\n");
     enterStudents(room);
 }
@@ -58,7 +58,7 @@ int isValidLayout(int layout) {
     return layout >= 1 && layout <= 3;
 }
 
-Room *genRoom(int rows, int cols, int layout) {
+Room *generateNewRoom(int rows, int cols, int layout) {
     if (!isValidRowNumber(rows) || !isValidColNumber(cols) || !isValidLayout(layout)) {
         return NULL;
     }

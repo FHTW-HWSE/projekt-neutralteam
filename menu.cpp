@@ -9,7 +9,7 @@
 #include "loadRoom.hpp"
 #include "enterStudents.hpp"
 
-void menu() {
+void showMenu() {
     char str[MAX_UIMENU_SELECTION_LENGTH] = "0";
     int option = 0;
     do {
@@ -25,7 +25,7 @@ void menu() {
     }  while(!isValidOption(option));
     switch (option) {
     case 1:
-        newRoom();
+        createNewRoom();
         break;
     case 2: {
             char fileName[MAX_FILENAME_LENGTH+1];
