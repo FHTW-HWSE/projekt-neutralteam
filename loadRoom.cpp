@@ -69,8 +69,8 @@ Room *getRoomFromFileContent(char *fileContent) {
             return NULL;
         }
         *split = '\0';
-        int seat = atoi(seatString);
-        if (!isValidSeatNumber(room, seat)) {
+        int seatNumber = atoi(seatString);
+        if (!isValidSeatNumber(room, seatNumber)) {
             printf("invalid file format2\n");
             free(fileContentSubstrings);
             return NULL;
@@ -81,7 +81,7 @@ Room *getRoomFromFileContent(char *fileContent) {
             free(fileContentSubstrings);
             return NULL;
         }
-        strcpy(room->seats[seat], studentId);
+        strcpy(room->seats[seatNumber], studentId);
     }
     free(fileContentSubstrings);
     return room;

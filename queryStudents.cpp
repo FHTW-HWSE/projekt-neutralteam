@@ -25,13 +25,13 @@ void queryStudents(Room *room) {
                 exit(0);
             }
         } while(!isValidStudentId(studentId));
-        int seat = getSeatByStudentId(room, studentId);
-        if (seat == -1) {
+        int seatNumber = getSeatNumberByStudentId(room, studentId);
+        if (seatNumber == -1) {
             printf("student not found\n");
         } else {
-            printf("student found at seat %d\n", seat);
-            Seats *directNeighbors = getDirectNeighborSeats(room, seat);
-            Seats *indirectNeighbors = getIndirectNeighborSeats(room, seat);
+            printf("student found at seat %d\n", seatNumber);
+            Seats *directNeighbors = getDirectNeighborSeats(room, seatNumber);
+            Seats *indirectNeighbors = getIndirectNeighborSeats(room, seatNumber);
             printf("direct neighbors:\n");
             printSeats(room, directNeighbors);
             printf("indirect neighbors:\n");
@@ -45,7 +45,7 @@ void queryStudents(Room *room) {
     freeRoom(room);
 }
   
-int getSeatByStudentId(Room *room, char *studentId) {
+int getSeatNumberByStudentId(Room *room, char *studentId) {
     for (int i = 0; i < room->rows*room->cols; i++) {
         if (isValidSeatNumber(room, i)) {
             if (strcmp(room->seats[i], studentId) == 0) {
