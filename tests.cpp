@@ -163,7 +163,7 @@ TEST_CASE("getSeatNumberByStudentId") {
     REQUIRE(-1 == getSeatNumberByStudentId(room, (char*)"studentId7"));
 }
 
-TEST_CASE("getTopLeftSeatNumber") {
+TEST_CASE("getTopLeftSeatNumber_5x5") {
     Room *room = GENERATE(generateNewRoom(5, 5, 1), generateNewRoom(5, 5, 2), generateNewRoom(5, 5, 3));
     REQUIRE(-1 == getTopLeftSeatNumber(room, 0));
     REQUIRE(-1 == getTopLeftSeatNumber(room, 1));
@@ -192,7 +192,7 @@ TEST_CASE("getTopLeftSeatNumber") {
     REQUIRE(18 == getTopLeftSeatNumber(room, 24));
 }
 
-TEST_CASE("getTopSeatNumber") {
+TEST_CASE("getTopSeatNumber_5x5") {
     Room *room = GENERATE(generateNewRoom(5, 5, 1), generateNewRoom(5, 5, 2), generateNewRoom(5, 5, 3));
     REQUIRE(-1 == getTopSeatNumber(room, 0));
     REQUIRE(-1 == getTopSeatNumber(room, 1));
@@ -221,7 +221,7 @@ TEST_CASE("getTopSeatNumber") {
     REQUIRE(19 == getTopSeatNumber(room, 24));
 }
 
-TEST_CASE("getTopRightSeatNumber") {
+TEST_CASE("getTopRightSeatNumber_5x5") {
     Room *room = GENERATE(generateNewRoom(5, 5, 1), generateNewRoom(5, 5, 2), generateNewRoom(5, 5, 3));
     REQUIRE(-1 == getTopRightSeatNumber(room, 0));
     REQUIRE(-1 == getTopRightSeatNumber(room, 1));
@@ -248,4 +248,57 @@ TEST_CASE("getTopRightSeatNumber") {
     REQUIRE(18 == getTopRightSeatNumber(room, 22));
     REQUIRE(19 == getTopRightSeatNumber(room, 23));
     REQUIRE(-1 == getTopRightSeatNumber(room, 24));
+}
+
+TEST_CASE("getRightSeatNumber_5x5") {
+    Room *room = GENERATE(generateNewRoom(5, 5, 1), generateNewRoom(5, 5, 2), generateNewRoom(5, 5, 3));
+    REQUIRE(1 == getRightSeatNumber(room, 0));
+    REQUIRE(2 == getRightSeatNumber(room, 1));
+    REQUIRE(3 == getRightSeatNumber(room, 2));
+    REQUIRE(4 == getRightSeatNumber(room, 3));
+    REQUIRE(-1 == getRightSeatNumber(room, 4));
+    REQUIRE(6 == getRightSeatNumber(room, 5));
+    REQUIRE(7 == getRightSeatNumber(room, 6));
+    REQUIRE(8 == getRightSeatNumber(room, 7));
+    REQUIRE(9 == getRightSeatNumber(room, 8));
+    REQUIRE(-1 == getRightSeatNumber(room, 9));
+    REQUIRE(11 == getRightSeatNumber(room, 10));
+    REQUIRE(12 == getRightSeatNumber(room, 11));
+    REQUIRE(13 == getRightSeatNumber(room, 12));
+    REQUIRE(14 == getRightSeatNumber(room, 13));
+    REQUIRE(-1 == getRightSeatNumber(room, 14));
+    REQUIRE(16 == getRightSeatNumber(room, 15));
+    REQUIRE(17 == getRightSeatNumber(room, 16));
+    REQUIRE(18 == getRightSeatNumber(room, 17));
+    REQUIRE(19 == getRightSeatNumber(room, 18));
+    REQUIRE(-1 == getRightSeatNumber(room, 19));
+    REQUIRE(21 == getRightSeatNumber(room, 20));
+    REQUIRE(22 == getRightSeatNumber(room, 21));
+    REQUIRE(23 == getRightSeatNumber(room, 22));
+    REQUIRE(24 == getRightSeatNumber(room, 23));
+    REQUIRE(-1 == getRightSeatNumber(room, 24));
+}
+
+TEST_CASE("getBottomRightSeatNumber_4x5") {
+    Room *room = GENERATE(generateNewRoom(4, 5, 1), generateNewRoom(4, 5, 2), generateNewRoom(4, 5, 3));
+    REQUIRE(6 == getBottomRightSeatNumber(room, 0));
+    REQUIRE(7 == getBottomRightSeatNumber(room, 1));
+    REQUIRE(8 == getBottomRightSeatNumber(room, 2));
+    REQUIRE(9 == getBottomRightSeatNumber(room, 3));
+    REQUIRE(-1 == getBottomRightSeatNumber(room, 4));
+    REQUIRE(11 == getBottomRightSeatNumber(room, 5));
+    REQUIRE(12 == getBottomRightSeatNumber(room, 6));
+    REQUIRE(13 == getBottomRightSeatNumber(room, 7));
+    REQUIRE(14 == getBottomRightSeatNumber(room, 8));
+    REQUIRE(-1 == getBottomRightSeatNumber(room, 9));
+    REQUIRE(16 == getBottomRightSeatNumber(room, 10));
+    REQUIRE(17 == getBottomRightSeatNumber(room, 11));
+    REQUIRE(18 == getBottomRightSeatNumber(room, 12));
+    REQUIRE(19 == getBottomRightSeatNumber(room, 13));
+    REQUIRE(-1 == getBottomRightSeatNumber(room, 14));
+    REQUIRE(-1 == getBottomRightSeatNumber(room, 15));
+    REQUIRE(-1 == getBottomRightSeatNumber(room, 16));
+    REQUIRE(-1 == getBottomRightSeatNumber(room, 17));
+    REQUIRE(-1 == getBottomRightSeatNumber(room, 18));
+    REQUIRE(-1 == getBottomRightSeatNumber(room, 19));
 }
