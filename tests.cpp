@@ -8,6 +8,8 @@
 #include "enterStudents.hpp"
 #include "queryStudents.hpp"
 
+#include "directNeighbors.hpp"
+
 #include "seat.hpp"
 
 
@@ -161,4 +163,31 @@ TEST_CASE("getSeatNumberByStudentId") {
     REQUIRE(-1 == getSeatNumberByStudentId(room, (char*)"studentId7"));
 }
 
-
+TEST_CASE("getTopLeftSeatNumber") {
+    Room *room = generateNewRoom(5, 5, 1);
+    REQUIRE(-1 == getTopLeftSeatNumber(room, 0));
+    REQUIRE(-1 == getTopLeftSeatNumber(room, 1));
+    REQUIRE(-1 == getTopLeftSeatNumber(room, 2));
+    REQUIRE(-1 == getTopLeftSeatNumber(room, 3));
+    REQUIRE(-1 == getTopLeftSeatNumber(room, 4));
+    REQUIRE(-1 == getTopLeftSeatNumber(room, 5));
+    REQUIRE(0 == getTopLeftSeatNumber(room, 6));
+    REQUIRE(1 == getTopLeftSeatNumber(room, 7));
+    REQUIRE(2 == getTopLeftSeatNumber(room, 8));
+    REQUIRE(3 == getTopLeftSeatNumber(room, 9));
+    REQUIRE(-1 == getTopLeftSeatNumber(room, 10));
+    REQUIRE(5 == getTopLeftSeatNumber(room, 11));
+    REQUIRE(6 == getTopLeftSeatNumber(room, 12));
+    REQUIRE(7 == getTopLeftSeatNumber(room, 13));
+    REQUIRE(8 == getTopLeftSeatNumber(room, 14));
+    REQUIRE(-1 == getTopLeftSeatNumber(room, 15));
+    REQUIRE(10 == getTopLeftSeatNumber(room, 16));
+    REQUIRE(11 == getTopLeftSeatNumber(room, 17));
+    REQUIRE(12 == getTopLeftSeatNumber(room, 18));
+    REQUIRE(13 == getTopLeftSeatNumber(room, 19));
+    REQUIRE(-1 == getTopLeftSeatNumber(room, 20));
+    REQUIRE(15 == getTopLeftSeatNumber(room, 21));
+    REQUIRE(16 == getTopLeftSeatNumber(room, 22));
+    REQUIRE(17 == getTopLeftSeatNumber(room, 23));
+    REQUIRE(18 == getTopLeftSeatNumber(room, 24));
+}

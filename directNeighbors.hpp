@@ -1,12 +1,12 @@
 #ifndef DIRECTNEIGHBORS_H
 #define DIRECTNEIGHBORS_H
 #include "room.hpp"
-int getTopLeftSeat(Room *room, int seatNumber);
-int getTopSeat(Room *room, int seatNumber);
-int getTopRightSeat(Room *room, int seatNumber);
-int getRightSeat(Room *room, int seatNumber);
-int getBottomRightSeat(Room *room, int seatNumber);
-int getBottomSeat(Room *room, int seatNumber);
-int getBottomLeftSeat(Room *room, int seatNumber);
-int getLeftSeat(Room *room, int seatNumber);
+int getTopLeftSeatNumber(Room *room, int seatNumber);
+int getTopSeatNumber(Room *room, int seatNumber);
+int getTopRightSeatNumber(Room *room, int seatNumber);
+int getRightSeatNumber(Room *room, int seatNumber);
+int getBottomRightSeatNumber(Room *room, int seatNumber);
+int getBottomSeatNumber(Room *room, int seatNumber);
+int getBottomLeftSeatNumber(Room *room, int seatNumber);
+int getLeftSeatNumber(Room *room, int seatNumber);
 #endif
