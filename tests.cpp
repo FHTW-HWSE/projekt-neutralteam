@@ -144,7 +144,7 @@ TEST_CASE("writeStudentIdToSeatNumber_layout3") {
     REQUIRE(strcmp(room->seats[seatNumber], "studentId") == 0);
 }
 
-TEST_CASE("getSeatNumberByStudentId_layout1_seat0") {
+TEST_CASE("getSeatNumberByStudentId") {
     Room *room = generateNewRoom(5, 5, 1);
     writeStudentIdToSeatNumber((char*)"studentId", room, 0);
     writeStudentIdToSeatNumber((char*)"studentId2", room, 7);
