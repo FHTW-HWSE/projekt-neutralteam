@@ -2,9 +2,14 @@
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 
-#include "enterStudents.hpp"
+
 #include "newRoom.hpp"
 #include "menu.hpp"
+#include "enterStudents.hpp"
+#include "queryStudents.hpp"
+
+#include "seat.hpp"
+
 
 TEST_CASE("IsValidRoomFileName_allowedName") {
     char const *fileName = GENERATE("room", "roomName", "test123", "1room", "...", ".../", "...\\", "room/room", "room\\room", "room.txt", "sitz.plan", "sitz.plan.wtf, sitz.plan.1");
@@ -66,7 +71,7 @@ TEST_CASE("isValidColNumber_forbiddenColNumber") {
     REQUIRE(0 == isValidColNumber(cols));
 }
 
-TEST_CASE("genRoom_validParameters") {
+TEST_CASE("generateNewRoom_validParameters") {
     int rows = GENERATE(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
     int cols = GENERATE(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
     int layout = GENERATE(1, 2, 3);
@@ -76,7 +81,7 @@ TEST_CASE("genRoom_validParameters") {
     REQUIRE(layout == room->layout);
 }
 
-TEST_CASE("genRoom_invalidRows") {
+TEST_CASE("generateNewRoom_invalidRows") {
     int rows = GENERATE(0, 101);
     int cols = GENERATE(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
     int layout = GENERATE(1, 2, 3);
@@ -84,7 +89,7 @@ TEST_CASE("genRoom_invalidRows") {
     REQUIRE(NULL == room);
 }
 
-TEST_CASE("genRoom_invalidCols") {
+TEST_CASE("generateNewRoom_invalidCols") {
     int rows = GENERATE(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
     int cols = GENERATE(0, 101);
     int layout = GENERATE(1, 2, 3);
@@ -92,10 +97,68 @@ TEST_CASE("genRoom_invalidCols") {
     REQUIRE(NULL == room);
 }
 
-TEST_CASE("genRoom_invalidLayout") {
+TEST_CASE("generateNewRoom_invalidLayout") {
     int rows = GENERATE(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
     int cols = GENERATE(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
     int layout = GENERATE(0, 4);
     Room *room = generateNewRoom(rows, cols, layout);
     REQUIRE(NULL == room);
 }
+
+TEST_CASE("isValidSeatNumber_layout1") {
+    Room *room = generateNewRoom(5, 5, 1);
+    int seatNumber = GENERATE(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24);
+    REQUIRE(1 == isValidSeatNumber(room, seatNumber));
+}
+
+TEST_CASE("isValidSeatNumber_layout2") {
+    Room *room = generateNewRoom(5, 5, 2);
+    int seatNumber = GENERATE(0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24);
+    REQUIRE(1 == isValidSeatNumber(room, seatNumber));
+}
+
+TEST_CASE("isValidSeatNumber_layout3") {
+    Room *room = generateNewRoom(5, 5, 3);
+    int seatNumber = GENERATE(0, 2, 4, 10, 12, 14, 20, 22, 24);
+    REQUIRE(1 == isValidSeatNumber(room, seatNumber));
+}
+
+TEST_CASE("writeStudentIdToSeatNumber_layout1") {
+    Room *room = generateNewRoom(5, 5, 1);
+     int seatNumber = GENERATE(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24);
+    writeStudentIdToSeatNumber((char*)"studentId", room, seatNumber);
+    REQUIRE(strcmp(room->seats[seatNumber], "studentId") == 0);
+}
+
+TEST_CASE("writeStudentIdToSeatNumber_layout2") {
+    Room *room = generateNewRoom(5, 5, 2);
+    int seatNumber = GENERATE(0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24);
+    writeStudentIdToSeatNumber((char*)"studentId", room, seatNumber);
+    REQUIRE(strcmp(room->seats[seatNumber], "studentId") == 0);
+}
+
+TEST_CASE("writeStudentIdToSeatNumber_layout3") {
+    Room *room = generateNewRoom(5, 5, 3);
+    int seatNumber = GENERATE(0, 2, 4, 10, 12, 14, 20, 22, 24);
+    writeStudentIdToSeatNumber((char*)"studentId", room, seatNumber);
+    REQUIRE(strcmp(room->seats[seatNumber], "studentId") == 0);
+}
+
+TEST_CASE("getSeatNumberByStudentId_layout1_seat0") {
+    Room *room = generateNewRoom(5, 5, 1);
+    writeStudentIdToSeatNumber((char*)"studentId", room, 0);
+    writeStudentIdToSeatNumber((char*)"studentId2", room, 7);
+    writeStudentIdToSeatNumber((char*)"studentId3", room, 9);
+    writeStudentIdToSeatNumber((char*)"studentId4", room, 16);
+    writeStudentIdToSeatNumber((char*)"studentId5", room, 18);
+    writeStudentIdToSeatNumber((char*)"studentId6", room, 24);
+    REQUIRE(0 == getSeatNumberByStudentId(room, (char*)"studentId"));
+    REQUIRE(7 == getSeatNumberByStudentId(room, (char*)"studentId2"));
+    REQUIRE(9 == getSeatNumberByStudentId(room, (char*)"studentId3"));
+    REQUIRE(16 == getSeatNumberByStudentId(room, (char*)"studentId4"));
+    REQUIRE(18 == getSeatNumberByStudentId(room, (char*)"studentId5"));
+    REQUIRE(24 == getSeatNumberByStudentId(room, (char*)"studentId6"));
+    REQUIRE(-1 == getSeatNumberByStudentId(room, (char*)"studentId7"));
+}
+
+
