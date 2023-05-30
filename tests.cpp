@@ -302,3 +302,27 @@ TEST_CASE("getBottomRightSeatNumber_4x5") {
     REQUIRE(-1 == getBottomRightSeatNumber(room, 18));
     REQUIRE(-1 == getBottomRightSeatNumber(room, 19));
 }
+
+TEST_CASE("getBottomSeatNumbe_5x4") {
+    Room *room = GENERATE(generateNewRoom(5, 4, 1), generateNewRoom(5, 4, 2), generateNewRoom(5, 4, 3));
+    REQUIRE(4 == getBottomSeatNumber(room, 0));
+    REQUIRE(5 == getBottomSeatNumber(room, 1));
+    REQUIRE(6 == getBottomSeatNumber(room, 2));
+    REQUIRE(7 == getBottomSeatNumber(room, 3));
+    REQUIRE(8 == getBottomSeatNumber(room, 4));
+    REQUIRE(9 == getBottomSeatNumber(room, 5));
+    REQUIRE(10 == getBottomSeatNumber(room, 6));
+    REQUIRE(11 == getBottomSeatNumber(room, 7));
+    REQUIRE(12 == getBottomSeatNumber(room, 8));
+    REQUIRE(13 == getBottomSeatNumber(room, 9));
+    REQUIRE(14 == getBottomSeatNumber(room, 10));
+    REQUIRE(15 == getBottomSeatNumber(room, 11));
+    REQUIRE(16 == getBottomSeatNumber(room, 12));
+    REQUIRE(17 == getBottomSeatNumber(room, 13));
+    REQUIRE(18 == getBottomSeatNumber(room, 14));
+    REQUIRE(19 == getBottomSeatNumber(room, 15));
+    REQUIRE(-1 == getBottomSeatNumber(room, 16));
+    REQUIRE(-1 == getBottomSeatNumber(room, 17));
+    REQUIRE(-1 == getBottomSeatNumber(room, 18));
+    REQUIRE(-1 == getBottomSeatNumber(room, 19));
+}
